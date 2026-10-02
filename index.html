@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beyond AI Detection: Fostering Epistemic Responsibility in the Classroom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4F6F9;--ink:#141D29;--ink2:#4A5566;--ink3:#7F8B9A;--rule:#D6DDE5;--soft:#E7ECF2;--soft2:#D9E0E8;--sheet:#FFFFFF;--line:#D3DAE2;--shadow:rgba(15,25,40,.14);
+--ai:#2C59D4;--ai-soft:#DCE5FB;--art:#9C8766;--art-soft:#EFE8DC;--det:#8A939E;--det-soft:#E1E5EA;
+--ev:#B87900;--re:#7A3E9D;--rs:#0E7A73;--ev-soft:#F7EACB;--re-soft:#EDE1F4;--rs-soft:#D5EEEA;--on-ink:#F4F6F9;--on-c:#FFFFFF;
+--night:#101925;--night-ink:#F3F6FA;--night-ink2:#A9B6C6;--letter:#C7CFD9;
+--sans:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--serif:"Newsreader",Georgia,"Times New Roman",serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0F151D;--ink:#EBF0F5;--ink2:#AEB9C6;--ink3:#7D8998;--rule:#2A3441;--soft:#18212B;--soft2:#222D39;--sheet:#1D2631;--line:#364251;--shadow:rgba(0,0,0,.45);
+--ai:#7E9DF3;--ai-soft:#1D2B48;--art:#C9B596;--art-soft:#2B2620;--det:#7F8994;--det-soft:#252C35;--ev:#E8AA2E;--re:#BE8BDE;--rs:#3CBDB2;--ev-soft:#3A2E12;--re-soft:#2E2138;--rs-soft:#12302D;--on-ink:#0F151D;--on-c:#0F151D;--night:#080D13;--letter:#05080C}}
+:root[data-theme="dark"]{--paper:#0F151D;--ink:#EBF0F5;--ink2:#AEB9C6;--ink3:#7D8998;--rule:#2A3441;--soft:#18212B;--soft2:#222D39;--sheet:#1D2631;--line:#364251;--shadow:rgba(0,0,0,.45);
+--ai:#7E9DF3;--ai-soft:#1D2B48;--art:#C9B596;--art-soft:#2B2620;--det:#7F8994;--det-soft:#252C35;--ev:#E8AA2E;--re:#BE8BDE;--rs:#3CBDB2;--ev-soft:#3A2E12;--re-soft:#2E2138;--rs-soft:#12302D;--on-ink:#0F151D;--on-c:#0F151D;--night:#080D13;--letter:#05080C}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;background:var(--letter);overflow:hidden;-webkit-font-smoothing:antialiased}
+.vp{position:relative;width:100%;height:100%;overflow:hidden;outline:none}
+.deck{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0;background:var(--paper);color:var(--ink);font:400 28px/1.42 var(--sans);overflow:hidden}
+.slide{position:absolute;inset:0;box-sizing:border-box;padding:80px 104px 120px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility 0s linear .4s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .4s ease}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;padding-bottom:28px}
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:600;margin:0}
+h2{font-size:60px;line-height:1.08;letter-spacing:-.012em;margin-bottom:44px;max-width:1340px;text-wrap:balance}
+p,figure{margin:0}
+.lead{font-size:30px;color:var(--ink2);max-width:1150px}
+.small{font-size:21px;color:var(--ink3)}
+.note{position:absolute;left:104px;right:104px;bottom:86px;font-size:19px;color:var(--ink3)}
+svg{display:block;overflow:visible}
+svg text{font-family:var(--sans)}
+.mk{fill:var(--ink3)}
+.b{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+.b.in{opacity:1;transform:none}
+.bx{transition:opacity .35s ease}.bx.out{opacity:0}
+.foot{position:absolute;left:104px;right:104px;bottom:34px;display:flex;align-items:center;gap:28px;font-size:18px;color:var(--ink3);transition:opacity .3s}
+.foot.hide{opacity:0}
+.fp{min-width:250px}
+.track{flex:1;display:flex;gap:6px;height:4px}
+.track i{display:block;height:100%;border-radius:2px;background:var(--soft2)}
+.track i.done{background:var(--ink3)}.track i.cur{background:var(--ink)}
+.fn{min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
+.ctl{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;opacity:0;transition:opacity .3s;z-index:5}
+.ctl.show,.ctl:focus-within{opacity:1}
+.ctl button{font:600 15px/1 system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;background:rgba(20,29,41,.84);border:0;border-radius:6px;padding:10px 14px;cursor:pointer}
+.ctl button:focus-visible{outline:2px solid #7E9DF3;outline-offset:2px}
+.hint{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:rgba(20,29,41,.92);color:#fff;font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;padding:10px 16px;border-radius:6px;width:max-content;max-width:calc(100% - 32px);text-align:center;transition:opacity .6s;z-index:6}
+.hint.off{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.slide,.b,.bx,.foot,.hint{transition:none}.b{transform:none}}
+
+/* 1 title */
+.night{background:var(--night);color:var(--night-ink)}
+.s1 h1{font-size:118px;line-height:.98;letter-spacing:-.022em;margin:112px 0 34px}
+.s1 .sub{font-family:var(--serif);font-size:40px;line-height:1.2;color:var(--night-ink2);max-width:780px}
+.s1 .who{margin-top:64px;font-size:22px;line-height:1.5;color:var(--night-ink2)}
+.s1 .who b{display:block;font-size:30px;color:var(--night-ink);margin-bottom:6px}
+.s1 .ov{position:absolute;right:92px;top:100px;width:600px;height:700px}
+/* 2 timeline */
+.tl-l{font-size:29px;font-weight:700;fill:var(--ink)}.tl-m{font-size:22px;fill:var(--ink3)}.tl-k{stroke:var(--ink3);stroke-width:2}
+/* 3 hook */
+.hook{display:flex;align-items:center;gap:72px}
+.papers{display:flex;gap:44px}
+.pp{display:flex;flex-direction:column;align-items:center}
+.sheet{width:262px;height:350px;box-sizing:border-box;background:var(--sheet);border-radius:6px;padding:24px;box-shadow:0 1px 0 var(--rule),0 14px 30px var(--shadow);transform:rotate(var(--r))}
+.sheet b{display:block;font-size:24px;margin-bottom:18px}
+.sheet i{display:block;height:9px;border-radius:4.5px;background:var(--line);margin-top:15px}
+.sheet i:nth-of-type(3n){width:84%}.sheet i:nth-of-type(4n){width:93%}.sheet i:last-of-type{width:56%}
+.det{display:inline-block;margin-top:28px;font-size:20px;color:var(--ink2);background:var(--det-soft);border-radius:99px;padding:6px 16px}
+.q{font-family:var(--serif);font-size:50px;line-height:1.14;font-weight:500;max-width:446px}
+/* 4 chain */
+.n4{fill:var(--soft)}.t4{font-size:32px;font-weight:700;fill:var(--ink);text-anchor:middle}
+.lk rect{fill:none;stroke:var(--ink2);stroke-width:7}.lk-ai rect{stroke:var(--ai)}
+.crack{fill:none;stroke:var(--ai);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.cap4{font-size:36px;line-height:1.35;color:var(--ink2);max-width:1120px}.cap4 b{color:var(--ink)}
+/* 5 views */
+.views{display:grid;grid-template-columns:200px repeat(4,1fr);gap:10px}
+.views>div{background:var(--soft);padding:16px 20px;font-size:24px;line-height:1.3;border-radius:8px}
+.views .rh{background:none;padding-left:0;color:var(--ink2);font-size:21px;font-weight:700;align-self:center}
+.views .ch{background:none;font-family:var(--serif);font-size:32px;font-weight:600;padding:4px 20px 10px;border-radius:0;border-bottom:4px solid var(--soft2)}
+.views .g{background:var(--ink);color:var(--on-ink)}
+.views .ch.g{background:none;color:var(--ink);border-bottom-color:var(--ai)}
+.views .e{background:none}
+.v5>div{font-size:22px}.v5 .rh{font-size:21px}.v5 .ch{font-size:32px}
+/* 6 system */
+.sys{display:grid;grid-template-columns:640px 1fr;gap:64px;align-items:center}
+.sys svg,.cyc svg{width:100%;height:auto}
+.e6 line{stroke:var(--ink3);stroke-width:4}
+.nl{font-size:28px;font-weight:700;text-anchor:middle}.c6{font-size:23px;fill:var(--ink2);text-anchor:middle}
+.li{display:grid;grid-template-columns:22px 1fr;gap:18px;margin-bottom:20px}
+.li .dot{width:22px;height:22px;border-radius:50%;margin-top:8px}
+.li b{display:block;font-size:28px}.li p{color:var(--ink2);font-size:24px;line-height:1.38}
+.take{margin-top:10px;padding-top:20px;border-top:2px solid var(--rule);font-weight:700;font-size:25px;line-height:1.35}
+/* 7 cycle */
+.cyc{display:grid;grid-template-columns:800px 1fr;gap:40px;align-items:center}
+.a7{fill:none;stroke:var(--ink3);stroke-width:4}
+.p7{font-size:27px;font-weight:700;text-anchor:middle}.c7{font-size:24px;fill:var(--ink2);text-anchor:middle}
+.lg{display:flex;gap:28px;font-size:22px;color:var(--ink2);margin-bottom:40px}
+.lg span{display:flex;align-items:center;gap:10px}.lg i{width:18px;height:18px;border-radius:50%;display:inline-block}
+.trail h3{font-size:38px;margin-bottom:24px}
+.docs{display:flex;gap:26px;margin-bottom:26px}
+.docs figure{width:100px;text-align:center;font-size:20px;color:var(--ink2)}
+.docs svg{width:100px;height:124px;margin-bottom:8px}
+.dk{fill:var(--sheet);stroke:var(--ink3);stroke-width:2.5}.dln{fill:var(--line)}.da{fill:var(--ai);opacity:.75}.di{fill:var(--ink2)}
+.trail p{font-size:26px;color:var(--ink2);max-width:520px}
+/* 8 tool/material */
+.tm{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.pnl{border-radius:12px;padding:30px 40px 34px}
+.pnl svg{width:340px;height:217px;margin:0 auto 18px}
+.pnl h3{font-size:40px;margin-bottom:8px}.pnl p{font-size:28px}.pnl .small{margin-top:6px;font-size:22px;color:var(--ink2)}
+.tl8{background:var(--det-soft)}.mt8{background:var(--art-soft)}
+.bot{margin-top:34px;font-size:32px;font-weight:700}
+/* 9 principles */
+.pr{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.tile{display:flex;align-items:center;gap:30px;background:var(--soft);border-radius:12px;padding:26px 32px;min-height:170px}
+.tile svg{width:110px;height:110px;flex:none}
+.tile h3{font-size:32px;line-height:1.1}.tile p{font-size:21px;line-height:1.35;color:var(--ink2);margin-top:8px}
+.ik{stroke:var(--ink);fill:none;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.ia{stroke:var(--ai);fill:none;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.i3{stroke:var(--ink3);fill:none;stroke-width:6;stroke-linecap:round}
+/* 10 roles */
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.role{display:grid;grid-template-columns:140px 1fr;gap:30px;background:var(--soft);border-radius:12px;padding:34px 38px}
+.role svg{width:140px;height:140px}
+.role .who10{font-size:22px;font-weight:700;color:var(--ink2)}
+.role h3{font-size:40px;line-height:1.1;margin:4px 0 12px}.role p{font-size:25px;color:var(--ink2)}
+.pull-s{margin:16px 0 0 36px;font-size:24px;color:var(--ink2);max-width:1150px}
+.pull{margin-top:40px;font-family:var(--serif);font-size:44px;line-height:1.18;font-weight:500;border-left:6px solid var(--ink);padding-left:30px;max-width:1200px}
+/* 11 bridge */
+.s11 h2{margin-bottom:34px}
+.st11{fill:none;stroke:var(--ink3);stroke-width:3;stroke-dasharray:10 8}
+.tx11{font-size:28px;font-weight:700;text-anchor:middle}
+.tg11{font-size:22px;text-anchor:middle}
+.cap11{margin-top:8px;font-size:28px;color:var(--ink2)}
+.core{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center;margin-top:24px;background:var(--soft);border-radius:12px;padding:22px 34px}
+.core .big{font-family:var(--serif);font-size:50px;font-weight:600;line-height:1.05;margin:6px 0 14px}
+.tri{display:flex;gap:5px;width:430px;height:7px;margin-bottom:14px}.tri i{flex:1;border-radius:4px}
+.ev11{font-size:27px;line-height:1.32;margin:8px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.chips span{font-size:21px;border:2px solid var(--rule);background:var(--paper);border-radius:99px;padding:6px 14px}
+
+/* ---------- part 2 ---------- */
+.src{font-size:18px;color:var(--ink3);margin-top:10px}
+.qs{display:grid;grid-template-columns:1fr 80px 1fr;gap:24px;align-items:stretch}
+.qc{border-radius:14px;padding:34px 38px;display:flex;flex-direction:column;justify-content:center;min-height:240px}
+.qc.old{background:var(--det-soft)}.qc.old .qq{color:var(--ink2)}
+.qc.new{background:var(--ink)}.qc.new .small{color:var(--on-ink);opacity:.72}.qc.new .qq{color:var(--on-ink)}
+.qq{font-family:var(--serif);font-size:54px;line-height:1.08;font-weight:600;margin-top:12px}
+.qa{align-self:center;width:80px}.qa path{fill:none;stroke:var(--ink3);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.ctx{margin-top:36px;border-left:6px solid var(--det);padding-left:26px;font-size:27px;line-height:1.4;color:var(--ink2);max-width:1280px}.ctx b{color:var(--ink)}
+.dt13 .lb{font-size:26px;font-weight:700;fill:var(--ink)}.dt13 .lt{font-size:20px}
+.dt13 .dbox{fill:var(--det-soft);stroke:var(--det);stroke-width:2.5}.dt13 .dtx{font-size:23px;fill:var(--ink2);text-anchor:middle}
+.dt13 .vd{fill:none;stroke:var(--ink);stroke-width:2.5}.dt13 .vtx{font-size:25px;font-weight:700;fill:var(--ink);text-anchor:middle}
+.dt13 .ln{stroke:var(--ink3);stroke-width:3.5}.dt13 .xc{fill:var(--ink)}.dt13 .xm{stroke:var(--on-ink);stroke-width:4;stroke-linecap:round}
+.dt13 .et{font-size:22px;fill:var(--ink2)}
+.ev3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.evc{background:var(--soft);border-radius:12px;padding:24px 26px}
+.evc h3{font-size:30px;line-height:1.12;margin-bottom:10px}.evc p{font-size:21px;line-height:1.38;color:var(--ink2)}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.nb{background:var(--det-soft);border-radius:14px;padding:32px 38px}
+.big-n{font-family:var(--serif);font-size:124px;line-height:.95;font-weight:600;letter-spacing:-.02em}
+.nl2{font-size:28px;font-weight:700;line-height:1.3;margin-top:14px}.nsub{font-size:22px;line-height:1.4;color:var(--ink2);margin-top:12px}
+.take14{margin-top:30px;font-family:var(--serif);font-size:40px;line-height:1.18;font-weight:500;border-left:6px solid var(--ink);padding-left:28px}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px;max-width:900px}
+.pc{display:flex;align-items:center;gap:22px;border-radius:12px;padding:22px 30px}
+.pc.u{background:var(--ai-soft)}.pc.d{background:var(--soft)}
+.pc svg{width:64px;height:64px;flex:none}.pc .w{font-family:var(--serif);font-size:56px;font-weight:600;line-height:1}
+.pc .ws{font-size:22px;color:var(--ink2);margin-left:auto}
+.cap15{margin-top:30px;font-size:28px;line-height:1.4;color:var(--ink2);max-width:1200px}.cap15 b{color:var(--ink)}
+.per{margin-top:24px;display:flex;gap:18px;align-items:baseline;font-size:26px}.per .tag{font-size:18px;font-weight:700;color:var(--ink2);background:var(--det-soft);border-radius:99px;padding:4px 12px;white-space:nowrap}
+.ice{display:grid;grid-template-columns:680px 1fr;gap:56px;align-items:center}
+.ice svg{width:100%;height:auto}
+.il{font-size:23px;font-weight:700;fill:var(--on-ink);text-anchor:middle}
+.quote{font-family:var(--serif);font-size:40px;line-height:1.22;font-weight:500}
+.sp17 .bar{stroke:none}.sp17 .pt{fill:var(--sheet);stroke:var(--ink);stroke-width:4}
+.sp17 .h{font-size:28px;font-weight:700;fill:var(--ink);text-anchor:middle}.sp17 .s{font-size:22px;fill:var(--ink2);text-anchor:middle}
+.sp17 .e{font-size:22px;fill:var(--ink3)}
+.two17{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.two17 p{background:var(--soft);border-radius:12px;padding:24px 28px;font-size:27px;line-height:1.35;color:var(--ink2)}.two17 b{color:var(--ink)}
+.dir4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.dc{background:var(--soft);border-radius:12px;padding:26px 26px 24px;display:flex;flex-direction:column}
+.dc h3{font-size:32px;line-height:1.1;margin-bottom:12px}.dc p{font-size:21px;line-height:1.4;color:var(--ink2)}
+.dc .today{margin-top:auto;padding-top:16px;border-top:2px solid var(--rule);font-size:19px;font-weight:700;color:var(--ink)}
+.dc .pg{font-size:17px;color:var(--ink3);margin:8px 0 16px}
+.lanes{display:grid;gap:22px}
+.lane{display:grid;grid-template-columns:230px 1fr 70px 1fr;gap:20px;align-items:center;border-radius:14px;padding:24px 30px}
+.lane.g{background:var(--det-soft)}.lane.k{background:var(--ink);color:var(--on-ink)}
+.lane .lh{font-size:21px;font-weight:700;opacity:.8}
+.lane .lbx{font-family:var(--serif);font-size:34px;line-height:1.15;font-weight:600}
+.lane svg{width:70px;height:36px}.lane svg path{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+.bridge{margin-top:34px;font-size:32px;line-height:1.35;color:var(--ink2)}.bridge b{color:var(--ink);font-family:var(--serif);font-size:40px}
+
+/* ---------- part 3 ---------- */
+.def20{display:grid;grid-template-columns:540px 1fr;gap:40px;align-items:stretch}
+.dcard{background:var(--ink);color:var(--on-ink);border-radius:14px;padding:38px 42px;display:flex;flex-direction:column;justify-content:center}
+.dcard .k{font-size:21px;font-weight:700;opacity:.72}
+.dcard .t{font-family:var(--serif);font-size:44px;line-height:1.1;font-weight:600;margin:10px 0 18px}
+.dcard .q{font-family:var(--serif);font-size:60px;line-height:1.04;font-weight:500}
+.dcard .s{font-size:19px;opacity:.72;margin-top:20px}
+.ideas{display:grid;gap:14px;align-content:center}
+.idea{background:var(--soft);border-radius:12px;padding:18px 24px}
+.idea b{display:block;font-size:26px;margin-bottom:4px}.idea p{font-size:21px;color:var(--ink2);line-height:1.35}
+.br20{margin-top:26px;font-size:26px;line-height:1.4;color:var(--ink2);border-left:6px solid var(--ink);padding-left:26px;max-width:1320px}.br20 b{color:var(--ink)}
+.rt{display:grid;grid-template-columns:1fr 1.3fr;gap:24px}
+.rtc{border-radius:14px;padding:28px 32px}
+.rtc.ai{background:var(--ai-soft)}.rtc.st{background:var(--ink);color:var(--on-ink)}
+.rtc .k{font-size:20px;font-weight:700;opacity:.75}
+.rtc h3{font-size:36px;margin:6px 0 18px}
+.rtc ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.rtc li{font-size:24px;border-radius:99px;padding:7px 18px}
+.rtc.ai li{background:var(--paper);color:var(--ink2)}
+.rtc.st li{border:2px solid currentColor;font-weight:700}
+.rtc .ex{font-size:18px;opacity:.72;margin-top:16px}
+.dq{margin-top:30px;font-family:var(--serif);font-size:40px;line-height:1.18;font-weight:500;max-width:1300px}
+.b3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.bc{border-radius:14px;padding:26px 28px 24px;border-top:10px solid var(--c);background:var(--cs)}
+.bc svg{width:96px;height:64px;margin-bottom:10px}
+.bc h3{font-size:32px;line-height:1.1;margin-bottom:10px}
+.bc .d{font-size:23px;line-height:1.35}
+.bc .see{margin-top:16px;padding-top:14px;border-top:2px solid var(--rule);font-size:20px;color:var(--ink2);line-height:1.4}
+.bc .see b{display:block;font-size:17px;color:var(--ink);margin-bottom:4px}
+.not4{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.nc{display:grid;grid-template-columns:56px 1fr;gap:20px;align-items:start;background:var(--soft);border-radius:12px;padding:24px 28px}
+.nc svg{width:56px;height:56px}
+.nc h3{font-size:32px;margin-bottom:8px}.nc p{font-size:22px;line-height:1.38;color:var(--ink2)}
+.mx{display:grid;grid-template-columns:230px repeat(3,1fr);gap:12px 14px}
+.mx .hd{border-radius:10px;padding:12px 18px;font-size:24px;font-weight:700;color:var(--on-c)}
+.mx .rl{font-size:21px;font-weight:700;color:var(--ink);align-self:center;line-height:1.25}
+.mx .rl span{display:block;font-weight:400;font-size:18px;color:var(--ink3);margin-top:4px}
+.mx .cell{display:flex;flex-direction:column;gap:8px}
+.chip{border-radius:10px;padding:11px 16px;font-size:22px;font-weight:700;color:var(--ink)}
+.cap24{margin-top:22px;font-size:22px;color:var(--ink2)}
+
+/* ---------- part 4A ---------- */
+.av{width:54px;height:54px;flex:none;border-radius:50%;display:inline-grid;place-items:center;font:700 25px/1 var(--sans);background:var(--soft2);color:var(--ink)}
+.task{background:var(--sheet);border-radius:10px;border-left:8px solid var(--ink);box-shadow:0 1px 0 var(--rule),0 12px 28px var(--shadow);padding:30px 38px;max-width:1240px}
+.task p{font-family:var(--serif);font-size:36px;line-height:1.28;font-weight:500}
+.avs{display:flex;gap:34px;margin-top:30px;align-items:center}
+.avs span.l{display:flex;align-items:center;gap:12px;font-size:24px;font-weight:700}
+.aside{margin-top:26px;font-size:26px;color:var(--ink2);border-left:6px solid var(--det);padding-left:22px}
+.pp3{display:flex;gap:56px;align-items:flex-start;justify-content:center}
+.pcard{display:flex;flex-direction:column;align-items:center;width:300px;text-align:center}
+.pcard .sheet{width:230px;height:300px}
+.pcard figcaption{margin-top:26px;font-size:22px;line-height:1.35;color:var(--ink2)}
+.q26{margin-top:34px;text-align:center;font-family:var(--serif);font-size:48px;font-weight:500}
+.lens{display:grid;grid-template-columns:420px 1fr;gap:44px;align-items:stretch}
+.lcard{border-radius:16px;padding:34px 36px;display:flex;flex-direction:column;justify-content:center}
+.lcard svg{width:120px;height:96px;margin-bottom:16px}
+.lcard .lname{font-family:var(--serif);font-size:44px;font-weight:600;line-height:1.05}
+.lcard .lsub{font-size:22px;color:var(--ink2);margin-top:10px;line-height:1.35}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tags span{font-size:18px;font-weight:700;color:var(--on-c);background:var(--c);border-radius:99px;padding:5px 12px}
+.lpts{display:grid;gap:14px;align-content:center}
+.lpts>div{background:var(--soft);border-radius:12px;padding:20px 26px}
+.lpts b{display:block;font-size:28px;margin-bottom:4px}.lpts p{font-size:23px;color:var(--ink2);line-height:1.35}
+.lensq{margin-top:28px;font-family:var(--serif);font-size:40px;line-height:1.18;font-weight:500;border-left:6px solid var(--ink);padding-left:28px}
+.ab{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.ab .col{background:var(--soft);border-radius:14px;padding:24px 26px}
+.stu{display:flex;gap:16px;align-items:center;margin-bottom:16px}.stu b{display:block;font-size:26px}.stu p{font-size:20px;color:var(--ink2)}
+.bub{position:relative;background:var(--paper);border-radius:14px 14px 14px 4px;padding:12px 18px 12px 64px;font-size:23px;line-height:1.35;margin-bottom:10px}
+.bub i{position:absolute;left:16px;top:13px;font-style:normal;font-size:17px;font-weight:700;color:var(--ink3)}
+.sum{margin-top:14px;font-size:21px;line-height:1.4;font-weight:700;color:var(--ink)}
+.mv{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.m{background:var(--soft);border-radius:12px;padding:18px 20px;border-top:5px solid var(--ink)}
+.m .mn{font-size:22px;font-weight:700;margin-bottom:8px}
+.m .mq{font-size:20px;line-height:1.35;color:var(--ink2)}
+.m .k{font-size:15px;font-weight:700;color:var(--ink3);margin-bottom:4px}
+.sum29{margin-top:24px;font-family:var(--serif);font-size:38px;line-height:1.2;font-weight:500;border-left:6px solid var(--ink);padding-left:26px}
+.dl{display:grid;gap:12px}
+.dh,.dr{display:grid;grid-template-columns:70px 230px 190px 1fr;gap:18px;align-items:center}
+.dh span{font-size:19px;font-weight:700;color:var(--ink3)}
+.dr{background:var(--soft);border-radius:12px;padding:16px 22px}
+.dr>b{font-size:26px}.dr>p{font-size:21px;line-height:1.38;color:var(--ink2)}
+.dr .ai{color:var(--ai)}
+.sum31{margin-top:24px;font-family:var(--serif);font-size:38px;line-height:1.2;font-weight:500;border-left:6px solid var(--ink);padding-left:26px}
+.def{display:grid;grid-template-columns:380px 1fr;gap:34px;align-items:stretch}
+.qt4{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.qt{background:var(--soft);border-radius:12px;padding:20px 24px}
+.qt b{display:block;font-size:22px;margin-bottom:8px}.qt p{font-family:var(--serif);font-size:25px;line-height:1.3}
+.qbox{display:flex;gap:20px;align-items:flex-start;background:var(--ink);color:var(--on-ink);border-radius:14px;padding:22px 28px}
+.qbox .qi{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:700 26px/1 var(--sans);background:var(--on-ink);color:var(--ink)}
+.qbox p{font-family:var(--serif);font-size:29px;line-height:1.3}
+.ans{display:grid;gap:12px;margin-top:16px}
+.ar{display:flex;gap:18px;align-items:flex-start;background:var(--soft);border-radius:12px;padding:16px 22px}
+.ar .say{font-family:var(--serif);font-size:26px;line-height:1.3}
+.ar .rd{font-size:20px;font-weight:700;color:var(--ink2);margin-top:6px}
+.m34{display:grid;grid-template-columns:70px repeat(3,1fr);gap:12px 14px;align-items:stretch}
+.m34 .hd{border-radius:10px;padding:14px 18px;font-size:25px;font-weight:700;color:var(--on-c)}
+.m34 .av{align-self:center}
+.m34 .c{background:var(--soft);border-radius:10px;padding:16px 20px;font-size:24px;line-height:1.3;display:flex;align-items:center}
+.m34 .c.s{background:var(--ink);color:var(--on-ink);font-weight:700}
+.sum34{margin-top:26px;font-family:var(--serif);font-size:36px;line-height:1.22;font-weight:500;border-left:6px solid var(--ink);padding-left:26px}
+
+/* ---------- part 4B ---------- */
+.ttl{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.ttl h2{margin-bottom:8px}
+.bp{flex:none;margin-top:12px;font-size:20px;font-weight:700;color:var(--on-c);background:var(--c);border-radius:99px;padding:7px 16px}
+.pl{font-size:30px;color:var(--ink2);margin-bottom:22px;max-width:1300px}
+.pat{display:grid;grid-template-columns:460px 1fr;gap:30px;align-items:start}
+.stp{display:grid;gap:12px}
+.st{background:var(--cs);border-radius:12px;padding:15px 20px;border-left:6px solid var(--c)}
+.st b{display:block;font-size:23px;margin-bottom:4px}.st p{font-size:21px;line-height:1.36;color:var(--ink2)}
+.ba{display:grid;grid-template-columns:134px 1fr 1.3fr;gap:8px 10px}
+.ba .h{font-size:19px;font-weight:700;color:var(--ink3);padding:0 4px}
+.ba .h.a{color:var(--ink)}
+.ba .r{font-size:17px;font-weight:700;color:var(--ink3);padding-top:13px;line-height:1.25}
+.ba .bf{background:var(--det-soft);border-radius:10px;padding:11px 15px;font-size:20.5px;line-height:1.36;color:var(--ink2)}
+.ba .af{background:var(--soft);border-radius:10px;padding:11px 15px;font-size:20.5px;line-height:1.36;color:var(--ink);border-left:5px solid var(--c)}
+.ba .q{font-family:var(--serif);font-size:22.5px;line-height:1.3;max-width:none;font-weight:400}
+.pm{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pgp{border-radius:14px;background:var(--cs);border-top:10px solid var(--c);padding:20px 22px}
+.pgp h3{font-size:28px;margin-bottom:12px}
+.pi{background:var(--paper);border-radius:10px;padding:11px 16px;margin-bottom:9px}
+.pi b{display:block;font-size:22px}.pi p{font-size:18px;color:var(--ink2);line-height:1.3;margin-top:2px}
+.pm-cap{margin-top:22px;font-family:var(--serif);font-size:34px;line-height:1.2;font-weight:500;border-left:6px solid var(--ink);padding-left:26px}
+
+/* ---------- part 4C + closing ---------- */
+.loop{display:flex;align-items:center;gap:10px;margin-bottom:26px;flex-wrap:wrap}
+.loop span{font-size:23px;font-weight:700;border-radius:99px;padding:9px 20px;background:var(--ink);color:var(--on-ink)}
+.loop span.ai{background:var(--ai);color:var(--on-c)}
+.loop i{font-style:normal;font-size:26px;color:var(--ink3)}
+.loop em{font-style:normal;font-size:20px;color:var(--ink3);margin-left:10px}
+.eng3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.eng{background:var(--soft);border-radius:12px;padding:24px 26px;border-top:6px solid var(--ink)}
+.eng h3{font-size:32px;margin-bottom:10px}.eng p{font-size:22px;line-height:1.38;color:var(--ink2)}
+.sum44{margin-top:26px;font-family:var(--serif);font-size:40px;line-height:1.18;font-weight:500;border-left:6px solid var(--ink);padding-left:26px}
+.case{display:grid;grid-template-columns:640px 1fr;gap:36px;align-items:start}
+.app{background:var(--sheet);border-radius:12px;box-shadow:0 1px 0 var(--rule),0 12px 28px var(--shadow);overflow:hidden}
+.app .bar{display:flex;gap:7px;padding:12px 16px;background:var(--soft)}.app .bar i{width:11px;height:11px;border-radius:50%;background:var(--soft2)}
+.app .in{padding:18px 22px}
+.app h4{margin:0 0 12px;font-size:22px}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kp div{background:var(--soft);border-radius:8px;padding:10px 12px}.kp b{display:block;font-size:30px;line-height:1}.kp span{font-size:16px;color:var(--ink2)}
+.th{display:grid;grid-template-columns:190px 1fr;gap:8px 12px;align-items:center;font-size:18px;color:var(--ink2)}
+.th i{display:block;height:14px;border-radius:7px;background:var(--ai);opacity:.75}
+.mock{font-size:16px;color:var(--ink3);margin-top:10px}
+.cf{display:grid;gap:12px}
+.cf>div{background:var(--soft);border-radius:12px;padding:16px 22px}
+.cf b{display:block;font-size:22px;margin-bottom:4px}.cf p{font-size:21px;line-height:1.36;color:var(--ink2)}
+.cf ol{margin:4px 0 0;padding-left:24px;font-size:21px;line-height:1.4;color:var(--ink2)}
+.cf .jd{background:var(--ink);color:var(--on-ink)}.cf .jd p{color:var(--on-ink);font-family:var(--serif);font-size:28px}
+.ev5{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.e5{background:var(--soft);border-radius:12px;padding:20px 20px;display:flex;flex-direction:column}
+.e5 svg{width:54px;height:54px;margin-bottom:12px}
+.e5 h3{font-size:26px;line-height:1.1;margin-bottom:8px}.e5 p{font-size:20px;line-height:1.35;color:var(--ink2)}
+.e5 .ln{margin-top:auto;padding-top:14px;font-size:16px;font-weight:700}
+.e5 .ln span{display:inline-block;border-radius:99px;padding:4px 10px;color:var(--ink)}
+.sum46{margin-top:24px;font-size:26px;line-height:1.4;color:var(--ink2);max-width:1300px}.sum46 b{color:var(--ink)}
+.gr{display:grid;grid-template-columns:230px 1fr 1fr 1fr;gap:10px 12px}
+.gr .h{font-size:19px;font-weight:700;color:var(--ink3);padding:0 6px}
+.gr .ln{border-radius:10px;padding:14px 16px;font-size:22px;font-weight:700;color:var(--ink);display:flex;align-items:center}
+.gr .c{background:var(--soft);border-radius:10px;padding:14px 16px;font-size:20px;line-height:1.36;color:var(--ink2)}
+.fz{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.fzc{background:var(--soft);border-radius:12px;padding:22px 26px}
+.fzc h3{font-size:30px;margin-bottom:8px}.fzc p{font-size:22px;line-height:1.38;color:var(--ink2)}
+.fzc .tg{display:inline-block;margin-top:10px;font-size:16px;font-weight:700;color:var(--ink2);background:var(--det-soft);border-radius:99px;padding:3px 10px}
+.fin{display:grid;grid-template-columns:1fr 520px;gap:40px;align-items:stretch}
+.q5{list-style:none;margin:0;padding:0;counter-reset:q}
+.q5 li{counter-increment:q;display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:baseline;font-family:var(--serif);font-size:32px;line-height:1.2;padding:12px 0;border-bottom:1px solid var(--rule)}
+.q5 li::before{content:counter(q);font-family:var(--sans);font-size:20px;font-weight:700;color:var(--ink3)}
+.thx{background:var(--night);color:var(--night-ink);border-radius:16px;padding:40px 42px;display:flex;flex-direction:column;justify-content:space-between}
+.thx .t{font-family:var(--serif);font-size:72px;line-height:1;font-weight:600}
+.thx .s{font-size:26px;color:var(--night-ink2);margin-top:14px}
+.thx .thxm{font-family:var(--serif);font-size:30px;line-height:1.2;margin-top:30px}
+.thx .c{font-size:20px;color:var(--night-ink2);margin-top:26px;line-height:1.5}
+.refs{columns:2;column-gap:44px;font-size:17px;line-height:1.45;color:var(--ink2)}
+.refs p{break-inside:avoid;margin:0 0 12px;padding-left:22px;text-indent:-22px}
+
+.pcard .sheet svg.pg{width:182px;height:200px;display:block}
+.sk-t{fill:var(--ink3)}.sk-l{fill:var(--line)}
+.pcard .sheet.two{box-shadow:0 1px 0 var(--rule),0 14px 30px var(--shadow),10px 10px 0 0 var(--soft2)}
+
+/* ---------- 4B routines (revised) ---------- */
+.tagcol{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:8px;margin-top:10px}
+.prn{font-size:17px;font-weight:700;color:var(--ink2);border:2px solid var(--ink3);border-radius:99px;padding:4px 13px;white-space:nowrap}
+.prn span{font-weight:400;color:var(--ink3)}
+.shr{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.shc{background:var(--soft);border-radius:12px;padding:26px 24px;border-top:6px solid var(--ink)}
+.shc h3{font-size:31px;line-height:1.1;margin-bottom:12px}.shc p{font-size:23px;line-height:1.38;color:var(--ink2)}
+.allbar{border-radius:12px;padding:14px 22px;margin-bottom:16px;background:linear-gradient(90deg,var(--ev-soft),var(--re-soft),var(--rs-soft))}
+.allbar b{font-size:23px}.allbar span{font-size:19px;color:var(--ink2);margin-left:12px}
+
+/* ---------- presenter view ---------- */
+.notes{display:none}
+.pv{display:none}
+body.presenter{background:#0B1017}
+body.presenter .vp{position:absolute;left:20px;top:20px;width:calc(62% - 30px);height:calc(100% - 40px)}
+body.presenter .ctl,body.presenter .hint{display:none}
+body.presenter .pv{display:grid;position:absolute;top:20px;right:20px;bottom:20px;width:calc(38% - 30px);grid-template-rows:auto auto auto auto 1fr;gap:12px;color:#E8EDF3;font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.pv-bar{display:flex;align-items:center;gap:16px;font-variant-numeric:tabular-nums}
+.pv-bar .pv-t b{font-size:30px;font-weight:700;margin-right:6px}
+.pv-bar #pvClock{margin-left:auto;color:#AFBCCB}
+.pv-bar button{font:600 14px/1 system-ui,sans-serif;color:#E8EDF3;background:#1E2A38;border:1px solid #33445A;border-radius:6px;padding:8px 12px;cursor:pointer}
+.pv-meta{display:flex;gap:18px;color:#AFBCCB;font-variant-numeric:tabular-nums}
+.pv-meta b{color:#E8EDF3}
+.pv-nav{display:flex;gap:10px}
+.pv-nav button{flex:1;font:600 17px/1 system-ui,-apple-system,"Segoe UI",sans-serif;color:#E8EDF3;background:#1E2A38;border:1px solid #33445A;border-radius:8px;padding:12px 10px;cursor:pointer}
+.pv-nav button:hover{background:#26364A}
+.pv-nav #pvGoNext{background:#2C59D4;border-color:#2C59D4}
+.pv-next{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:6px;overflow:hidden}
+.pv-next .lbl{position:absolute;left:8px;top:6px;z-index:3;font-size:12px;color:#fff;background:rgba(0,0,0,.65);padding:2px 8px;border-radius:4px}
+.pv-next .slide,.pv-next .b,.pv-next .bx{transition:none!important}
+.pv-notes{position:relative;overflow:auto;min-height:0;background:#141C27;border:1px solid #243140;border-radius:6px;padding:16px 18px;font-size:20px;line-height:1.5}
+.pv-notes p{margin:0 0 .75em}
+.pv-notes .cue{color:#8FA3B8;font-style:italic;font-size:17px}
+.pv-notes .cue.now{color:#FFD27A;font-style:normal;font-weight:700}
+</style>
+</head>
+<body>
+<div class="vp" id="vp" tabindex="0" aria-label="Slide deck. Use the arrow keys to move between slides.">
+<div class="deck" id="deck">
+
+<!-- 1 -->
+<section class="slide night s1" data-part="Opening" data-nofoot aria-label="Title">
+<h1>Beyond AI<br>Detection</h1>
+<p class="sub">Fostering Epistemic Responsibility<br>in the Classroom</p>
+<div class="who"><b>JaeHwan Byun, Ph.D.</b>Associate Professor<br>Chair, M.Ed. in Learning and Instructional Design<br>Director, Applied AI in Education (A²E) Lab<br>Wichita State University</div>
+<svg class="ov" viewBox="0 0 600 700" role="img" aria-label="A student paper with a gray detector score at the top and colored marks of evidence, reasoning, and responsibility in the margins">
+<rect x="84" y="74" width="440" height="590" rx="12" fill="#FFFFFF" opacity=".07" transform="rotate(-4 304 369)"/>
+<rect x="60" y="50" width="440" height="590" rx="12" fill="#F3F6FA"/>
+<rect x="92" y="84" width="264" height="52" rx="26" fill="#D3D9E0"/>
+<text x="116" y="117" font-size="20" fill="#4E5968">Detector score</text>
+<rect x="268" y="104" width="66" height="12" rx="6" fill="#AFB8C2"/><rect x="268" y="104" width="42" height="12" rx="6" fill="#7D8794"/>
+<rect x="92" y="170" width="250" height="16" rx="5" fill="#9AA6B3"/>
+<rect x="86" y="262" width="394" height="26" rx="5" fill="#E8AA2E" opacity=".42"/>
+<g fill="#D2D9E1"><rect x="92" y="212" width="376" height="9" rx="4.5"/><rect x="92" y="242" width="352" height="9" rx="4.5"/><rect x="92" y="272" width="380" height="9" rx="4.5"/><rect x="92" y="302" width="320" height="9" rx="4.5"/><rect x="92" y="332" width="372" height="9" rx="4.5"/><rect x="92" y="362" width="300" height="9" rx="4.5"/><rect x="92" y="392" width="364" height="9" rx="4.5"/><rect x="92" y="422" width="344" height="9" rx="4.5"/><rect x="92" y="452" width="380" height="9" rx="4.5"/><rect x="92" y="482" width="290" height="9" rx="4.5"/><rect x="92" y="512" width="366" height="9" rx="4.5"/><rect x="92" y="542" width="330" height="9" rx="4.5"/><rect x="92" y="572" width="250" height="9" rx="4.5"/></g>
+<path d="M76 258v34" stroke="#E8AA2E" stroke-width="5" stroke-linecap="round"/>
+<path d="M484 275H514" stroke="#E8AA2E" stroke-width="3"/>
+<rect x="514" y="256" width="80" height="38" rx="9" fill="#E8AA2E"/><text x="554" y="281" text-anchor="middle" font-size="18" font-weight="700" fill="#1A1406">source</text>
+<path d="M92 366.5H388" stroke="#BE8BDE" stroke-width="4" stroke-linecap="round"/>
+<path d="M222 388l10-14 10 14" stroke="#BE8BDE" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M396 366C446 366 474 382 510 404" stroke="#BE8BDE" stroke-width="3" fill="none"/>
+<circle cx="540" cy="420" r="30" fill="#BE8BDE"/><text x="540" y="432" text-anchor="middle" font-size="34" font-weight="700" fill="#1C1124">?</text>
+<path d="M96 612c16-22 30 14 46-4s26-18 38 2 24 8 40-10" stroke="#3CBDB2" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M238 606H506" stroke="#3CBDB2" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+<circle cx="540" cy="606" r="30" fill="#3CBDB2"/><path d="M526 606l10 10 18-20" stroke="#0B2624" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-part="Opening" aria-label="The hour at a glance">
+<h2>The Hour at a Glance</h2>
+<div class="body"><svg viewBox="0 58 1392 248" role="img" aria-label="Timeline of the session: opening, generativism, challenges for educators, epistemic responsibility, assignment and assessment examples, closing, and questions">
+<defs><clipPath id="c2er"><rect x="440.8" y="136" width="112" height="84" rx="8"/></clipPath></defs>
+<text x="160.4" y="88" text-anchor="middle" class="tl-l">Generativism</text><line x1="160.4" y1="100" x2="160.4" y2="128" class="tl-k"/>
+<text x="496.8" y="88" text-anchor="middle" class="tl-l">Epistemic Responsibility</text><line x1="496.8" y1="100" x2="496.8" y2="128" class="tl-k"/>
+<text x="1216" y="88" text-anchor="middle" class="tl-l">Closing</text><line x1="1216" y1="100" x2="1216" y2="128" class="tl-k"/>
+<rect x="0" y="136" width="65.6" height="84" rx="8" style="fill:var(--soft2)"/>
+<rect x="69.6" y="136" width="181.6" height="84" rx="8" style="fill:var(--ink3)"/>
+<rect x="255.2" y="136" width="181.6" height="84" rx="8" style="fill:var(--ink2)"/>
+<g clip-path="url(#c2er)"><rect x="440.8" y="136" width="112" height="28" style="fill:var(--ev)"/><rect x="440.8" y="164" width="112" height="28" style="fill:var(--re)"/><rect x="440.8" y="192" width="112" height="28" style="fill:var(--rs)"/></g>
+<rect x="556.8" y="136" width="576" height="84" rx="8" style="fill:var(--ink)"/>
+<rect x="1136.8" y="136" width="158.4" height="84" rx="8" style="fill:var(--ink3)"/>
+<rect x="1301.2" y="138" width="88.8" height="80" rx="8" style="fill:none;stroke:var(--ink3);stroke-width:2.5;stroke-dasharray:6 6"/>
+<line x1="32.8" y1="228" x2="32.8" y2="256" class="tl-k"/><text x="0" y="292" class="tl-l">Opening</text>
+<line x1="346" y1="228" x2="346" y2="256" class="tl-k"/><text x="346" y="292" text-anchor="middle" class="tl-l">Challenges</text>
+<line x1="844.8" y1="228" x2="844.8" y2="256" class="tl-k"/><text x="844.8" y="292" text-anchor="middle" class="tl-l">Assignment &amp; Assessment Examples</text>
+<line x1="1345.6" y1="228" x2="1345.6" y2="256" class="tl-k"/><text x="1392" y="292" text-anchor="end" class="tl-l">Questions</text>
+</svg>
+</div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-part="Opening" aria-label="Three students, three polished papers">
+<h2>Three Students. Three Polished Papers.</h2>
+<div class="body"><div class="hook">
+<div class="papers">
+<figure class="pp"><div class="sheet" style="--r:-2deg"><b>Student A</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="det">AI detector: ?</span></figure>
+<figure class="pp"><div class="sheet" style="--r:.6deg"><b>Student B</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="det">AI detector: ?</span></figure>
+<figure class="pp"><div class="sheet" style="--r:2deg"><b>Student C</b><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="det">AI detector: ?</span></figure>
+</div>
+<p class="q b" data-b="1">What would a detector tell you about what each student knows?</p>
+</div>
+</div>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-part="Generativism" aria-label="A broken link">
+<h2>A Broken Link</h2>
+<div class="body"><svg viewBox="0 0 1392 250" role="img" aria-label="A chain of three links: what we believe learning is, what we ask students to produce, and what we accept as evidence. Generative AI breaks the last link.">
+<rect x="0" y="40" width="380" height="170" rx="18" class="n4"/><text x="190" y="116" class="t4">What we believe</text><text x="190" y="156" class="t4">learning is</text>
+<rect x="506" y="40" width="380" height="170" rx="18" class="n4"/><text x="696" y="116" class="t4">What we ask</text><text x="696" y="156" class="t4">students to produce</text>
+<rect x="1012" y="40" width="380" height="170" rx="18" class="n4"/><text x="1202" y="116" class="t4">What we accept</text><text x="1202" y="156" class="t4">as evidence</text>
+<g class="lk"><rect x="398" y="107" width="60" height="36" rx="18"/><rect x="428" y="107" width="60" height="36" rx="18"/></g>
+<g class="lk bx" data-b="1"><rect x="904" y="107" width="60" height="36" rx="18"/><rect x="934" y="107" width="60" height="36" rx="18"/></g>
+<g class="b" data-b="1"><g class="lk lk-ai"><rect x="888" y="107" width="52" height="36" rx="18" transform="rotate(-16 914 125)"/><rect x="958" y="107" width="52" height="36" rx="18" transform="rotate(16 984 125)"/></g><path d="M949 92l9 11-9 11 9 11-9 11 9 11" class="crack"/></g>
+</svg>
+<p class="cap4 b" data-b="1" style="margin-top:56px"><b>Generative AI breaks the last link.</b> A polished product no longer shows understanding by itself.</p>
+</div>
+<p class="note">Paradigms establish what counts as knowledge, how learning occurs, how it is measured, and what roles instructors and learners play (Byun and Alagic, 2026, p. 35).</p>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-part="Generativism" aria-label="Four views of learning">
+<h2>Four Views of Learning</h2>
+<div class="body"><div class="views v5">
+<div class="e"></div><div class="ch">Behaviorism</div><div class="ch">Cognitivism</div><div class="ch">Constructivism</div><div class="ch g b" data-b="1">Generativism</div>
+<div class="rh">Learning is</div><div>A change in observable behavior due to environmental stimuli</div><div>The acquisition and structuring of knowledge</div><div>An active process of constructing meaning from experience</div><div class="g b" data-b="1">A critical thinker's distributed process of co-constituting meaning in a human–AI–artifact system</div>
+<div class="rh">The learner is</div><div>A passive being reacting to external stimuli</div><div>An active cognitive processor</div><div>A meaning-maker shaped by experience and context</div><div class="g b" data-b="1">An orchestrator of generative processes</div>
+<div class="rh">Assessment</div><div>Observable behavior on tests and tasks, correct or incorrect</div><div>Mental processes through concept maps, cases, and structured evaluations</div><div>Authentic assessment, such as portfolios, reflections, and projects</div><div class="g b" data-b="1">The quality of interaction episodes and the learner's epistemic reflexivity</div>
+</div>
+</div>
+<p class="note">Adapted from Byun and Alagic (2026), Table 1. Distinct from Pratschke's (2024) design approach of the same name and from Wittrock's generative learning theory.</p>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-part="Generativism" aria-label="Learning is enacted within a human–AI–artifact system">
+<h2>Learning Is Enacted Within a Human–AI–Artifact System</h2>
+<div class="body"><div class="sys">
+<svg viewBox="0 16 720 552" role="img" aria-label="Human, AI, and artifact linked by two-way arrows">
+<defs><marker id="m6" viewBox="0 0 16 16" refX="13" refY="8" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0L16 8L0 16z" class="mk"/></marker></defs>
+<g class="e6"><line x1="309.9" y1="191.9" x2="190.1" y2="388.1" marker-start="url(#m6)" marker-end="url(#m6)"/><line x1="410.1" y1="191.9" x2="529.9" y2="388.1" marker-start="url(#m6)" marker-end="url(#m6)"/><line x1="236" y1="470" x2="484" y2="470" marker-start="url(#m6)" marker-end="url(#m6)"/></g>
+<circle cx="360" cy="110" r="86" style="fill:var(--ink)"/><text x="360" y="120" class="nl" style="fill:var(--on-ink)">Human</text>
+<circle cx="140" cy="470" r="86" style="fill:var(--ai)"/><text x="140" y="480" class="nl" style="fill:var(--on-c)">AI</text>
+<circle cx="580" cy="470" r="86" style="fill:var(--art)"/><text x="580" y="480" class="nl" style="fill:var(--on-c)">Artifact</text>
+<text x="360" y="346" class="c6">learning emerges</text><text x="360" y="378" class="c6">in the interactions</text>
+</svg>
+<div>
+<div class="li"><span class="dot" style="background:var(--ink)"></span><div><b>Human</b><p>A critical thinker who interprets, critiques, and integrates what AI produces.</p></div></div>
+<div class="li"><span class="dot" style="background:var(--ai)"></span><div><b>AI</b><p>A semi-autonomous partner producing novel, variable outputs.</p></div></div>
+<div class="li"><span class="dot" style="background:var(--art)"></span><div><b>Artifact</b><p>Not just the outcome: a participant in the ongoing trajectory of learning.</p></div></div>
+<p class="take">Learning emerges as a distributed process in which humans and AI co-constitute meaning.</p>
+</div>
+</div>
+</div>
+<p class="note">Byun and Alagic (2026), pp. 37–39. “Partner” is a metaphor: the system operates on statistical patterns (p. 43).</p>
+</section>
+
+<!-- 7 -->
+<section class="slide" data-part="Generativism" aria-label="The unit of analysis: the interaction episode">
+<h2>The Unit of Analysis: The Interaction Episode</h2>
+<div class="body"><div class="cyc">
+<svg viewBox="0 24 800 548" role="img" aria-label="Cycle: prompting by the learner, generation by AI, critique by the learner, refinement by the learner, then back to prompting">
+<defs><marker id="m7" viewBox="0 0 18 18" refX="15" refY="9" markerWidth="18" markerHeight="18" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L18 9L0 18z" class="mk"/></marker></defs>
+<text x="400" y="292" class="c7">one interaction</text><text x="400" y="322" class="c7">episode</text>
+<g class="b" data-b="1"><rect x="290" y="38" width="220" height="64" rx="32" style="fill:var(--ink)"/><text x="400" y="79" class="p7" style="fill:var(--on-ink)">Prompting</text></g>
+<g class="b" data-b="2"><path d="M541.6 118.8A230 230 0 0 1 618.7 228.9" class="a7" marker-end="url(#m7)"/><rect x="520" y="268" width="220" height="64" rx="32" style="fill:var(--ai)"/><text x="630" y="309" class="p7" style="fill:var(--on-c)">Generation</text></g>
+<g class="b" data-b="3"><path d="M618.7 371.1A230 230 0 0 1 541.6 481.2" class="a7" marker-end="url(#m7)"/><rect x="290" y="498" width="220" height="64" rx="32" style="fill:var(--ink)"/><text x="400" y="539" class="p7" style="fill:var(--on-ink)">Critique</text></g>
+<g class="b" data-b="4"><path d="M258.4 481.2A230 230 0 0 1 181.3 371.1" class="a7" marker-end="url(#m7)"/><rect x="60" y="268" width="220" height="64" rx="32" style="fill:var(--ink)"/><text x="170" y="309" class="p7" style="fill:var(--on-ink)">Refinement</text><path d="M181.3 228.9A230 230 0 0 1 258.4 118.8" class="a7" marker-end="url(#m7)"/></g>
+</svg>
+<div class="trail">
+<div class="lg"><span><i style="background:var(--ink)"></i>Learner</span><span><i style="background:var(--ai)"></i>AI</span></div>
+<div class="b" data-b="5">
+<h3>An evolving trail of artifacts</h3>
+<div class="docs">
+<figure><svg viewBox="0 0 100 124" aria-hidden="true"><path d="M6 3H70L94 27V121H6Z" class="dk"/><path d="M70 3V27H94" class="dk"/><rect x="18" y="42" width="62" height="7" rx="3.5" class="di"/><rect x="18" y="58" width="48" height="7" rx="3.5" class="dln"/></svg><figcaption>Prompt</figcaption></figure>
+<figure><svg viewBox="0 0 100 124" aria-hidden="true"><path d="M6 3H70L94 27V121H6Z" class="dk"/><path d="M70 3V27H94" class="dk"/><rect x="18" y="42" width="64" height="7" rx="3.5" class="da"/><rect x="18" y="58" width="58" height="7" rx="3.5" class="da"/><rect x="18" y="74" width="64" height="7" rx="3.5" class="da"/><rect x="18" y="90" width="44" height="7" rx="3.5" class="da"/></svg><figcaption>Draft</figcaption></figure>
+<figure><svg viewBox="0 0 100 124" aria-hidden="true"><path d="M6 3H70L94 27V121H6Z" class="dk"/><path d="M70 3V27H94" class="dk"/><rect x="18" y="42" width="64" height="7" rx="3.5" class="da" opacity=".35"/><rect x="18" y="58" width="58" height="7" rx="3.5" class="da" opacity=".35"/><path d="M14 38v26" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/><rect x="18" y="80" width="54" height="7" rx="3.5" class="di"/><rect x="18" y="96" width="40" height="7" rx="3.5" class="di"/></svg><figcaption>Critique</figcaption></figure>
+<figure><svg viewBox="0 0 100 124" aria-hidden="true"><path d="M6 3H70L94 27V121H6Z" class="dk"/><path d="M70 3V27H94" class="dk"/><rect x="18" y="42" width="64" height="7" rx="3.5" class="di"/><rect x="18" y="58" width="56" height="7" rx="3.5" class="da" opacity=".6"/><rect x="18" y="74" width="62" height="7" rx="3.5" class="di"/><rect x="18" y="90" width="48" height="7" rx="3.5" class="di"/></svg><figcaption>Revision</figcaption></figure>
+</div>
+<p>Framing learning at the episode level lets us track not only what students produce but how the process unfolds over time.</p>
+</div>
+</div>
+</div>
+</div>
+<p class="note">Byun and Alagic (2026), pp. 39–40.</p>
+</section>
+
+<!-- 8 -->
+<section class="slide" data-part="Generativism" aria-label="A tool or a material">
+<h2>A Tool or a Material?</h2>
+<div class="body"><div class="tm">
+<div class="pnl tl8">
+<svg viewBox="0 0 360 230" aria-hidden="true">
+<rect x="24" y="22" width="312" height="176" rx="18" style="fill:var(--sheet);stroke:var(--ink2);stroke-width:5"/>
+<rect x="48" y="46" width="192" height="128" rx="10" style="fill:var(--ink2)"/>
+<path d="M62 60h60l-60 60z" style="fill:var(--sheet);opacity:.2"/>
+<rect x="258" y="46" width="56" height="30" rx="6" style="fill:var(--ai-soft);stroke:var(--ai);stroke-width:2"/>
+<text x="286" y="67" text-anchor="middle" style="font-size:16px;font-weight:700;fill:var(--ai)">0:30</text>
+<g style="fill:var(--ink3)"><circle cx="272" cy="98" r="7"/><circle cx="300" cy="98" r="7"/><circle cx="272" cy="122" r="7"/><circle cx="300" cy="122" r="7"/></g>
+<rect x="258" y="142" width="56" height="32" rx="8" style="fill:var(--ink)"/><text x="286" y="164" text-anchor="middle" style="font-size:15px;font-weight:700;fill:var(--on-ink)">Start</text>
+<rect x="54" y="198" width="36" height="10" rx="3" style="fill:var(--ink2)"/><rect x="270" y="198" width="36" height="10" rx="3" style="fill:var(--ink2)"/>
+</svg>
+<h3>As a tool</h3><p>Press a button. Get a result.</p><p class="small">Convenient, with little thinking required.</p>
+</div>
+<div class="pnl mt8">
+<svg viewBox="0 0 360 230" aria-hidden="true">
+<rect x="16" y="118" width="328" height="96" rx="14" style="fill:var(--art);opacity:.32"/>
+<path d="M60 152C52 118 96 96 146 102C198 94 252 110 260 142C268 176 228 196 164 194C106 198 66 186 60 152Z" style="fill:var(--sheet);stroke:var(--art);stroke-width:5"/>
+<path d="M88 130c-9 11-9 27 3 38M234 124c10 9 12 26 1 38" style="fill:none;stroke:var(--art);stroke-width:3.5;stroke-linecap:round;opacity:.6"/>
+<g style="fill:var(--art);opacity:.75"><circle cx="38" cy="140" r="3"/><circle cx="50" cy="198" r="2.5"/><circle cx="302" cy="134" r="3"/><circle cx="322" cy="188" r="2.5"/><circle cx="288" cy="204" r="2"/><circle cx="132" cy="176" r="2.5"/><circle cx="178" cy="112" r="2.5"/></g>
+<g transform="rotate(-12 180 52)"><rect x="96" y="38" width="170" height="30" rx="15" style="fill:var(--art)"/><rect x="64" y="47" width="36" height="12" rx="6" style="fill:var(--ink2)"/><rect x="262" y="47" width="36" height="12" rx="6" style="fill:var(--ink2)"/></g>
+<path d="M250 190L332 158C340 155 345 163 338 167L260 206Z" style="fill:var(--det-soft);stroke:var(--ink2);stroke-width:3;stroke-linejoin:round"/>
+<path d="M206 206L250 190L260 206L216 222Z" style="fill:var(--ink)"/>
+</svg>
+<h3>As a material</h3><p>Knead it. Cut it. Shape it.</p><p class="small">Demanding. It takes skill and judgment.</p>
+</div>
+</div>
+<p class="bot b" data-b="1">Same AI. The task design decides which one students experience.</p>
+</div>
+<p class="note">Generativism moves beyond viewing AI as a mere tool, toward material engagement with generated artifacts (Byun and Alagic, 2026, pp. 40, 43).</p>
+</section>
+
+<!-- 9 -->
+<section class="slide" data-part="Generativism" aria-label="Four provisional design principles">
+<h2 style="margin-bottom:18px">Four Provisional Design Principles</h2>
+<p class="lead" style="max-width:none">They carry Generativism into task design. Responsibility for thinking cuts across all four.</p>
+<div class="body"><div class="pr">
+<div class="tile"><svg viewBox="0 0 130 130" aria-hidden="true"><path d="M12 86H50M40 74l12 12-12 12" class="ik"/><path d="M118 86H80M90 74l-12 12 12 12" class="ia"/><path d="M65 72V22M53 34l12-13 12 13" class="ik"/><circle cx="65" cy="86" r="6" style="fill:var(--ink2)"/></svg><div><h3>Dialectic engagement</h3><p>Compare competing interpretations instead of accepting the first fluent AI response.</p></div></div>
+<div class="tile"><svg viewBox="0 0 130 130" aria-hidden="true"><path d="M30 44C30 28 42 20 52 20C64 20 74 28 74 40C74 52 64 56 58 60C53 63 52 68 52 76" class="ik"/><circle cx="52" cy="96" r="5.5" style="fill:var(--ink)"/><path d="M84 52L106 30M88 64H114M84 76L104 98" class="i3"/><g style="fill:var(--ai)"><circle cx="110" cy="26" r="8"/><circle cx="118" cy="64" r="8"/><circle cx="108" cy="102" r="8"/></g></svg><div><h3>Generative inquiry</h3><p>Treat AI output as material for further questioning, not a finished answer to adopt.</p></div></div>
+<div class="tile"><svg viewBox="0 0 130 130" aria-hidden="true"><path d="M14 30H88M14 48H80M14 66H70" class="i3"/><circle cx="74" cy="74" r="28" style="fill:var(--soft);stroke:var(--ink);stroke-width:7"/><path d="M95 95L118 118" class="ik" style="stroke-width:10"/><text x="74" y="86" text-anchor="middle" style="font-size:32px;font-weight:700;fill:var(--ai)">?</text></svg><div><h3>Epistemic interrogation</h3><p>Examine the assumptions, evidence, limitations, errors, bias, and uncertainty in AI output.</p></div></div>
+<div class="tile"><svg viewBox="0 0 130 130" aria-hidden="true"><rect x="18" y="84" width="28" height="32" rx="4" style="fill:var(--ink3)"/><rect x="51" y="62" width="28" height="54" rx="4" style="fill:var(--ink2)"/><rect x="84" y="40" width="28" height="76" rx="4" style="fill:var(--ai)"/><path d="M14 64C14 34 36 16 62 14" class="i3"/><path d="M54 5l11 9-11 10" class="i3"/></svg><div><h3>Iterative knowledge construction</h3><p>Revise an understanding or artifact across cycles, not after one prompt and response.</p></div></div>
+</div>
+</div>
+<p class="note">From Byun and Alagic's design-based research proposal, currently under review. The principles are provisional and are being refined.</p>
+</section>
+
+<!-- 10 -->
+<section class="slide s11" data-part="Generativism" aria-label="Detection asks who wrote it; Generativism asks who did the thinking">
+<h2>Detection Asks Who Wrote It. Generativism Asks Who Did the Thinking.</h2>
+<div class="body"><svg viewBox="0 0 1392 196" role="img" aria-label="Prompting, critique, and refinement by the learner do not appear in the final paper; generation by AI does">
+<defs><marker id="m11" viewBox="0 0 16 16" refX="13" refY="8" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L16 8L0 16z" class="mk"/></marker></defs>
+<rect x="1.5" y="17.5" width="233" height="89" rx="16" class="st11"/><text x="118" y="72" class="tx11" style="fill:var(--ink3)">Prompting</text>
+<rect x="276" y="16" width="236" height="92" rx="16" style="fill:var(--ai)"/><text x="394" y="72" class="tx11" style="fill:var(--on-c)">Generation</text>
+<rect x="553.5" y="17.5" width="233" height="89" rx="16" class="st11"/><text x="670" y="72" class="tx11" style="fill:var(--ink3)">Critique</text>
+<rect x="829.5" y="17.5" width="233" height="89" rx="16" class="st11"/><text x="946" y="72" class="tx11" style="fill:var(--ink3)">Refinement</text>
+<g style="fill:none;stroke:var(--ink3);stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><path d="M250 50l12 12-12 12"/><path d="M526 50l12 12-12 12"/><path d="M802 50l12 12-12 12"/></g>
+<line x1="1080" y1="62" x2="1162" y2="62" style="stroke:var(--ink3);stroke-width:3" marker-end="url(#m11)"/>
+<text x="118" y="152" class="tg11" style="fill:var(--ink3)">Not in the paper</text>
+<text x="394" y="152" class="tg11" style="fill:var(--ai);font-weight:700">In the paper</text>
+<text x="670" y="152" class="tg11" style="fill:var(--ink3)">Not in the paper</text>
+<text x="946" y="152" class="tg11" style="fill:var(--ink3)">Only the result</text>
+<path d="M1182 0H1294L1324 30V164H1182Z" style="fill:var(--sheet);stroke:var(--ink3);stroke-width:2.5"/><path d="M1294 0V30H1324" style="fill:none;stroke:var(--ink3);stroke-width:2.5"/>
+<g style="fill:var(--ai);opacity:.75"><rect x="1198" y="48" width="110" height="8" rx="4"/><rect x="1198" y="68" width="98" height="8" rx="4"/><rect x="1198" y="88" width="110" height="8" rx="4"/><rect x="1198" y="108" width="86" height="8" rx="4"/><rect x="1198" y="128" width="104" height="8" rx="4"/></g>
+<text x="1253" y="192" class="tg11" style="fill:var(--ink);font-weight:700">Final paper</text>
+</svg>
+<p class="cap11">The final paper shows what AI generated and little of what the learner did.</p>
+<div class="core b" data-b="1">
+<div><p class="small">The central construct</p><p class="big">Responsibility for thinking</p><span class="tri"><i style="background:var(--ev)"></i><i style="background:var(--re)"></i><i style="background:var(--rs)"></i></span><p class="small">Operationalizes epistemic responsibility (Code, 1987) in instructional design. Generativism's epistemological standard is epistemic reflexivity (Byun and Alagic, 2026, p. 39).</p></div>
+<div><p class="small">What changes in evaluation</p><p class="ev11">Beyond the correctness of products: the transparency, reflexivity, and ethical quality of the process.</p><p class="small">Byun and Alagic (2026, p. 38)</p></div>
+</div>
+</div>
+</section>
+
+<!-- 11 -->
+<section class="slide" data-part="Challenges for Educators" aria-label="The question has shifted">
+<h2>The Question Has Shifted</h2>
+<div class="body">
+<div class="qs">
+<div class="qc old"><p class="small">The question we started with</p><p class="qq">Did they use AI?</p></div>
+<svg class="qa" viewBox="0 0 80 40" aria-hidden="true"><path d="M4 20H66M54 8l14 12-14 12"/></svg>
+<div class="qc new b" data-b="1"><p class="small">The question we need now</p><p class="qq">What thinking do they still own?</p></div>
+</div>
+<p class="ctx b" data-b="2"><b>Use has outpaced guidance.</b> In a 2025 RAND survey of U.S. middle and high schools, 54% of students and 53% of English, math, and science teachers said they used AI for school. Over 80% of the students said no teacher had explicitly taught them how.</p>
+</div>
+<p class="note">Doss et al. (2025), RAND Corporation, RR-A4180-1. Nationally representative surveys of U.S. K–12 students, teachers, and school leaders.</p>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-part="Challenges for Educators" aria-label="Detectors fail in both directions">
+<h2>Detectors Fail in Both Directions</h2>
+<div class="body">
+<svg class="dt13" viewBox="0 0 1392 250" role="img" aria-label="Human writing can be flagged as AI, a false positive. AI writing, often paraphrased, can pass as human, a false negative.">
+<defs><marker id="m13" viewBox="0 0 16 16" refX="13" refY="8" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L16 8L0 16z" class="mk"/></marker></defs>
+<path d="M0 22H50L68 40V100H0Z" style="fill:var(--sheet);stroke:var(--ink2);stroke-width:2.5"/><g style="fill:var(--ink2)"><rect x="12" y="52" width="44" height="6" rx="3"/><rect x="12" y="66" width="36" height="6" rx="3"/><rect x="12" y="80" width="42" height="6" rx="3"/></g>
+<text x="90" y="70" class="lb">Human writing</text>
+<line x1="316" y1="61" x2="396" y2="61" class="ln" marker-end="url(#m13)"/>
+<rect x="408" y="30" width="210" height="62" rx="12" class="dbox"/><text x="513" y="69" class="dtx">Detector</text>
+<line x1="630" y1="61" x2="726" y2="61" class="ln" marker-end="url(#m13)"/>
+<rect x="738" y="30" width="300" height="62" rx="31" class="vd"/><text x="888" y="70" class="vtx">Flagged as AI</text>
+<circle cx="1082" cy="61" r="24" class="xc"/><path d="M1072 51l20 20M1092 51l-20 20" class="xm"/>
+<text x="1122" y="70" class="et">False positive</text>
+<path d="M0 152H50L68 170V230H0Z" style="fill:var(--sheet);stroke:var(--ai);stroke-width:2.5"/><g style="fill:var(--ai)"><rect x="12" y="182" width="44" height="6" rx="3"/><rect x="12" y="196" width="36" height="6" rx="3"/><rect x="12" y="210" width="42" height="6" rx="3"/></g>
+<text x="90" y="186" class="lb">AI writing</text><text x="90" y="216" class="lt" style="fill:var(--ai)">often paraphrased</text>
+<line x1="316" y1="191" x2="396" y2="191" class="ln" marker-end="url(#m13)"/>
+<rect x="408" y="160" width="210" height="62" rx="12" class="dbox"/><text x="513" y="199" class="dtx">Detector</text>
+<line x1="630" y1="191" x2="726" y2="191" class="ln" marker-end="url(#m13)"/>
+<rect x="738" y="160" width="300" height="62" rx="31" class="vd"/><text x="888" y="200" class="vtx">Passed as human</text>
+<circle cx="1082" cy="191" r="24" class="xc"/><path d="M1072 181l20 20M1092 181l-20 20" class="xm"/>
+<text x="1122" y="200" class="et">False negative</text>
+</svg>
+<div class="ev3 b" data-b="1">
+<div class="evc"><h3>Unreliable both ways</h3><p>In 2023 tests, fourteen tools, including Turnitin, were neither accurate nor reliable, and leaned toward calling AI text human. Obfuscation made results worse.</p><p class="src">Weber-Wulff et al., 2023</p></div>
+<div class="evc"><h3>The maker withdrew its tool</h3><p>OpenAI retired its own AI text classifier on July 20, 2023, citing its low rate of accuracy.</p><p class="src">OpenAI, 2023</p></div>
+<div class="evc"><h3>Better, but easy to evade</h3><p>As of 2025, mainstream paid detectors showed relatively low false-positive rates; free tools often did not. Bypass techniques often cut accuracy substantially.</p><p class="src">Jisc National Centre for AI, 2025</p></div>
+</div>
+</div>
+</section>
+
+<!-- 13 -->
+<section class="slide" data-part="Challenges for Educators" aria-label="Who pays for a false positive">
+<h2>Who Pays for a False Positive?</h2>
+<div class="body">
+<div class="nums">
+<div class="nb"><p class="big-n">61%</p><p class="nl2">Average false-positive rate of seven AI detectors on 91 TOEFL essays by non-native English writers</p><p class="nsub">The same detectors were near-perfect on U.S. eighth-grade essays. Tested in 2023; today's tools may perform differently.</p><p class="src">Liang et al., 2023, Patterns</p></div>
+<div class="nb b" data-b="1"><p class="big-n">1 in 2</p><p class="nl2">U.S. middle and high school students worried about being falsely accused of using AI to cheat</p><p class="nsub">34% of K–12 teachers reported school or district policies on AI and academic integrity.</p><p class="src">Doss et al., 2025, RAND; surveyed in 2025</p></div>
+</div>
+<p class="take14 b" data-b="2">In that study, the detectors penalized simpler, more predictable prose, so the risk fell hardest on multilingual writers.</p>
+</div>
+</section>
+
+<!-- 14 -->
+<section class="slide" data-part="Challenges for Educators" aria-label="The efficiency paradox">
+<h2>The Efficiency Paradox</h2>
+<div class="body">
+<p class="lead" style="margin-bottom:22px">When AI is used as a tool:</p>
+<div class="par">
+<div class="pc u"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 54V12M16 28l16-16 16 16" style="fill:none;stroke:var(--ai);stroke-width:7;stroke-linecap:round;stroke-linejoin:round"/></svg><span class="w">Speed</span></div>
+<div class="pc d"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 10V52M16 36l16 16 16-16" style="fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round;stroke-linejoin:round"/></svg><span class="w">Thinking</span></div>
+<div class="pc u"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 54V12M16 28l16-16 16 16" style="fill:none;stroke:var(--ai);stroke-width:7;stroke-linecap:round;stroke-linejoin:round"/></svg><span class="w">Result</span></div>
+<div class="pc d"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 10V52M16 36l16 16 16-16" style="fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round;stroke-linejoin:round"/></svg><span class="w">Process</span></div>
+</div>
+<p class="cap15"><b>Faster and more polished is not the same as more learned.</b> This is a design risk to plan for, not a measured law.</p>
+<p class="per b" data-b="1"><span class="tag">Student perception</span><span>In December 2025, 67% of U.S. students from middle school through college agreed that the more students use AI for schoolwork, the more it will harm their critical thinking. <span class="src" style="display:inline">RAND survey, n = 1,214 (Schwartz and Diliberti, 2026)</span></span></p>
+</div>
+</section>
+
+<!-- 15 -->
+<section class="slide" data-part="Challenges for Educators" aria-label="When the product stops indicating learning">
+<h2>When the Product Stops Indicating Learning</h2>
+<div class="body">
+<div class="ice">
+<svg viewBox="0 0 680 520" role="img" aria-label="An iceberg: only the final product shows above the waterline; prompts, critique, verification, revision, and judgment sit below">
+<rect x="0" y="150" width="680" height="370" rx="10" style="fill:var(--ai-soft)"/>
+<line x1="0" y1="150" x2="680" y2="150" style="stroke:var(--ai);stroke-width:3"/>
+<path d="M270 150L300 70L346 34L394 64L430 150Z" style="fill:var(--sheet);stroke:var(--ink3);stroke-width:2.5"/>
+<g style="fill:var(--ai);opacity:.7"><rect x="318" y="84" width="54" height="6" rx="3"/><rect x="310" y="100" width="72" height="6" rx="3"/><rect x="302" y="116" width="92" height="6" rx="3"/></g>
+<text x="452" y="84" style="font-size:24px;font-weight:700;fill:var(--ink)">What we grade</text><text x="452" y="114" style="font-size:22px;fill:var(--ink2)">the final product</text>
+<path d="M270 150L430 150L520 238L566 352L508 462L356 500L196 458L140 340L186 232Z" style="fill:var(--ink)"/>
+<text x="352" y="228" class="il" style="fill:var(--on-ink)">prompts</text>
+<text x="262" y="300" class="il" style="fill:var(--on-ink)">critique</text><text x="448" y="300" class="il" style="fill:var(--on-ink)">verification</text>
+<text x="300" y="372" class="il" style="fill:var(--on-ink)">revision</text><text x="452" y="384" class="il" style="fill:var(--on-ink)">judgment</text>
+<text x="350" y="430" class="il" style="fill:var(--on-ink);opacity:.72;font-weight:400;font-size:20px">where the learning happened</text>
+</svg>
+<div><p class="quote">“When the final artefact … becomes an unreliable indicator of student learning, the journey of development takes on greater significance.”</p><p class="src" style="font-size:20px;margin-top:18px">Desai, 2026, p. 65, in UNESCO, The algorithm in the room</p></div>
+</div>
+</div>
+</section>
+
+<!-- 16 -->
+<section class="slide" data-part="Challenges for Educators" aria-label="Moving to process is not enough by itself">
+<h2>Moving to Process Is Not Enough by Itself</h2>
+<div class="body">
+<svg class="sp17" viewBox="0 0 1392 250" role="img" aria-label="A spectrum from easy to hand off to AI, to hard to hand off: final product, process log, live explanation and defense">
+<defs><linearGradient id="g17" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:var(--soft2)"/><stop offset="1" style="stop-color:var(--ink)"/></linearGradient></defs>
+<text x="40" y="44" class="e">Easy to hand off to AI</text><text x="1352" y="44" class="e" text-anchor="end">Hard to hand off</text>
+<rect x="40" y="66" width="1312" height="16" rx="8" style="fill:url(#g17)"/>
+<circle cx="200" cy="74" r="20" class="pt"/><circle cx="696" cy="74" r="20" class="pt"/><circle cx="1192" cy="74" r="20" class="pt"/>
+<text x="200" y="146" class="h">Final product</text><text x="200" y="182" class="s">AI can generate it.</text>
+<text x="696" y="146" class="h">Process log</text><text x="696" y="182" class="s">Can be curated, or produced</text><text x="696" y="210" class="s">after the fact.</text>
+<text x="1192" y="146" class="h">Live explanation and defense</text><text x="1192" y="182" class="s">Requires reasoning in real time.</text>
+</svg>
+<div class="two17 b" data-b="1">
+<p><b>Use process evidence to make judgment visible,</b> as part of the task design.</p>
+<p><b>Used to police students, it becomes detection by another name.</b></p>
+</div>
+</div>
+<p class="note">Positions on the spectrum are a design judgment, not measured data. Desai (2026, p. 66) argues that dialogue and defence are inherently difficult to outsource to AI.</p>
+</section>
+
+<!-- 17 -->
+<section class="slide" data-part="Challenges for Educators" aria-label="UNESCO's assessment chapter points the same way">
+<h2>UNESCO's Assessment Chapter Points the Same Way</h2>
+<div class="body">
+<div class="dir4">
+<div class="dc"><h3>Audit AI output</h3><p class="pg">p. 65</p><p>Critique AI-generated essays for fallacies and bias; analyze conflicting AI accounts.</p><p class="today">Today: Fact-Check Log, Exemplar Calibration</p></div>
+<div class="dc"><h3>Assess the process</h3><p class="pg">pp. 65–66</p><p>Process journals, staged submissions, structured peer review, recorded think-alouds.</p><p class="today">Today: Prompt Archive, Delta Report, Accountability Note</p></div>
+<div class="dc"><h3>Dialogue and defence</h3><p class="pg">p. 66</p><p>Structured interviews, group dialogue, and spontaneous questions that require real-time reasoning.</p><p class="today">Today: AI Defense, Two-Minute Defense, Steelman to Synthesis</p></div>
+<div class="dc"><h3>Situate in students' lives</h3><p class="pg">p. 66</p><p>Connect course concepts to personal experience, community, and observation.</p><p class="today">Today: Predict, Compare, Decide</p></div>
+</div>
+<p class="lead" style="margin-top:28px;font-size:26px">A think piece: others are reaching similar ideas, but this is not evidence that they work.</p>
+</div>
+<p class="note">Desai, H. (2026). What's worth measuring? The future of assessment in the AI age. In The algorithm in the room (pp. 64–67). UNESCO.</p>
+</section>
+
+<!-- 18 -->
+<section class="slide" data-part="Challenges for Educators" aria-label="When assessment changes, teaching changes">
+<h2>When Assessment Changes, Teaching Changes</h2>
+<div class="body">
+<div class="lanes">
+<div class="lane g"><p class="lh">Product-centered assessment</p><p class="lbx">We grade the product only</p><svg viewBox="0 0 70 36" aria-hidden="true"><path d="M4 18H60M48 6l12 12-12 12"/></svg><p class="lbx">Students tend to focus on the product</p></div>
+<div class="lane k b" data-b="1"><p class="lh">Process-centered assessment</p><p class="lbx">We assess collaboration and judgment</p><svg viewBox="0 0 70 36" aria-hidden="true"><path d="M4 18H60M48 6l12 12-12 12"/></svg><p class="lbx">Students are more likely to leave traces of their judgment</p></div>
+</div>
+<p class="bridge b" data-b="2">Changing what counts as evidence redesigns the task itself. So what should that evidence show? <b>Epistemic responsibility.</b></p>
+</div>
+</section>
+
+<!-- 19 -->
+<section class="slide" data-part="Epistemic Responsibility" aria-label="Epistemic responsibility: the obligation to know well">
+<h2>Where the Idea Comes From</h2>
+<div class="body">
+<div class="def20">
+<div class="dcard"><p class="k">Epistemic responsibility</p><p class="q">The obligation to “know well”</p><p class="s">Code, 1987</p></div>
+<div class="ideas">
+<div class="idea"><b>Knowing is a process</b><p>Attention moves from finished products of knowledge to the ongoing processes of knowing.</p></div>
+<div class="idea"><b>Responsibility is the central intellectual virtue</b><p>It concerns how a person inquires, not only what they conclude.</p></div>
+<div class="idea"><b>Knowing happens in dialogue</b><p>Knowledge emerges between knowers situated in social and historical contexts.</p></div>
+</div>
+</div>
+<p class="br20 b" data-b="1"><b>With AI, the dialogue changes.</b> In human dialogue, knowledge is validated reciprocally. In a human–AI system, the burden of validation falls almost entirely on the learner (Byun and Alagic, 2026, p. 39).</p>
+</div>
+<p class="note">Code, L. (1987). Epistemic responsibility. Brown University Press and University Press of New England. Reissued by SUNY Press, 2020.</p>
+</section>
+
+<!-- 20 -->
+<section class="slide" data-part="Epistemic Responsibility" aria-label="Responsibility for thinking">
+<h2>Responsibility for Thinking</h2>
+<div class="body">
+<p class="lead" style="margin-bottom:26px">Our central construct turns epistemic responsibility into a design decision.</p>
+<div class="rt">
+<div class="rtc ai"><p class="k">AI may assist</p><h3>Help that leaves the thinking intact</h3><ul><li>Generate options</li><li>Draft</li><li>Explain</li><li>Critique on request</li></ul><p class="ex">Examples. Each course draws this line differently.</p></div>
+<div class="rtc st b" data-b="1"><p class="k">Must remain with the student</p><h3>The intellectual work we assess</h3><ul><li>Reasoning</li><li>Judgment</li><li>Verification</li><li>Revision</li><li>Synthesis</li></ul></div>
+</div>
+<p class="dq b" data-b="2">For every task: which work must the student retain, and where may AI help?</p>
+</div>
+<p class="note">From Byun and Alagic's design-based research proposal, currently under review. Responsibility for thinking operationalizes epistemic responsibility in instructional design.</p>
+</section>
+
+<!-- 21 -->
+<section class="slide" data-part="Epistemic Responsibility" aria-label="What epistemic responsibility looks like in student work">
+<h2>What It Looks Like in Student Work</h2>
+<div class="body">
+<div class="b3">
+<div class="bc" style="--c:var(--ev);--cs:var(--ev-soft)"><svg viewBox="0 0 96 64" aria-hidden="true"><rect x="2" y="4" width="62" height="56" rx="6" style="fill:var(--sheet);stroke:var(--ink3);stroke-width:2"/><rect x="8" y="22" width="50" height="12" rx="3" style="fill:var(--ev);opacity:.45"/><g style="fill:var(--ink3)"><rect x="12" y="14" width="42" height="4" rx="2"/><rect x="12" y="26" width="42" height="4" rx="2"/><rect x="12" y="40" width="34" height="4" rx="2"/><rect x="12" y="50" width="38" height="4" rx="2"/></g><path d="M64 28H72" style="stroke:var(--ev);stroke-width:3"/><rect x="72" y="18" width="22" height="20" rx="4" style="fill:var(--ev)"/><path d="M78 28l4 4 7-8" style="fill:none;stroke:var(--on-c);stroke-width:3;stroke-linecap:round;stroke-linejoin:round"/></svg>
+<h3>Evaluate evidence</h3><p class="d">Check claims, including AI's, against sources they can name.</p><p class="see"><b>What you can see</b>Citations to course texts, verification steps, corrected errors</p></div>
+<div class="bc b" data-b="1" style="--c:var(--re);--cs:var(--re-soft)"><svg viewBox="0 0 96 64" aria-hidden="true"><rect x="2" y="4" width="62" height="56" rx="6" style="fill:var(--sheet);stroke:var(--ink3);stroke-width:2"/><g style="fill:var(--ink3)"><rect x="12" y="14" width="42" height="4" rx="2"/><rect x="12" y="26" width="42" height="4" rx="2"/><rect x="12" y="44" width="36" height="4" rx="2"/></g><path d="M10 28H56" style="stroke:var(--re);stroke-width:3.5;stroke-linecap:round"/><path d="M28 40l5-7 5 7" style="fill:none;stroke:var(--re);stroke-width:3;stroke-linecap:round;stroke-linejoin:round"/><circle cx="82" cy="30" r="13" style="fill:var(--re)"/><text x="82" y="37" text-anchor="middle" style="font-size:19px;font-weight:700;fill:var(--on-c)">?</text></svg>
+<h3>Reflect on reasoning</h3><p class="d">Expose, test, and revise their own reasoning.</p><p class="see"><b>What you can see</b>Annotated excerpts, rebuttals answered, revised arguments</p></div>
+<div class="bc b" data-b="2" style="--c:var(--rs);--cs:var(--rs-soft)"><svg viewBox="0 0 96 64" aria-hidden="true"><path d="M4 44c8-12 16 8 24-2s14-10 20 1 12 4 20-5" style="fill:none;stroke:var(--rs);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round"/><path d="M4 54H70" style="stroke:var(--ink3);stroke-width:2"/><circle cx="82" cy="30" r="13" style="fill:var(--rs)"/><path d="M76 30l4 4 8-9" style="fill:none;stroke:var(--on-c);stroke-width:3;stroke-linecap:round;stroke-linejoin:round"/></svg>
+<h3>Take responsibility</h3><p class="d">Answer for the claims and decisions they submit, including what came from AI.</p><p class="see"><b>What you can see</b>Stated contributions, justified choices to accept or reject, live explanations</p></div>
+</div>
+</div>
+<p class="note">The three behaviors state this session's aim. They echo Generativism's account of validation: questioning sources, tracing assumptions, identifying biases, and justifying decisions (Byun and Alagic, 2026, p. 39).</p>
+</section>
+
+<!-- 22 -->
+<section class="slide" data-part="Epistemic Responsibility" aria-label="A map of today's examples">
+<h2>A Map of Today's Examples</h2>
+<div class="body">
+<div class="mx">
+<div></div>
+<div class="hd" style="background:var(--ev)">Evaluate evidence</div>
+<div class="hd" style="background:var(--re)">Reflect on reasoning</div>
+<div class="hd" style="background:var(--rs)">Take responsibility</div>
+<div class="rl" style="grid-row:2 / span 2">Assessment lenses<span>Same assignment, three students</span></div>
+<div class="chip" style="grid-row:2;grid-column:2 / span 2;background:linear-gradient(90deg,var(--ev-soft),var(--re-soft))">Prompt Archive</div>
+<div class="chip" style="grid-row:2;grid-column:4;background:var(--rs-soft)">Delta Report</div>
+<div class="chip" style="grid-row:3;grid-column:3 / span 2;background:linear-gradient(90deg,var(--re-soft),var(--rs-soft))">AI Defense</div>
+<div class="rl" style="grid-row:4 / span 2">Classroom practices<span>Seven practices</span></div>
+<div class="chip" style="grid-row:4;grid-column:2 / span 3;background:linear-gradient(90deg,var(--ev-soft),var(--re-soft),var(--rs-soft))">Watch Me Verify</div>
+<div class="cell" style="grid-row:5;grid-column:2"><span class="chip" style="background:var(--ev-soft)">Fact-Check Log</span><span class="chip" style="background:var(--ev-soft)">Exemplar Calibration</span></div>
+<div class="cell" style="grid-row:5;grid-column:3"><span class="chip" style="background:var(--re-soft)">Steelman to Synthesis</span><span class="chip" style="background:var(--re-soft)">Metacognition Mirror</span></div>
+<div class="cell" style="grid-row:5;grid-column:4"><span class="chip" style="background:var(--rs-soft)">Predict, Compare, Decide</span><span class="chip" style="background:var(--rs-soft)">Accountability Note and Defense</span></div>
+<div class="rl" style="grid-row:6">Student-built projects<span>The same lenses, applied to tools</span></div>
+<div class="chip" style="grid-row:6;grid-column:2 / span 3;background:linear-gradient(90deg,var(--ev-soft),var(--re-soft),var(--rs-soft))">Decision log, code explanation, limitations, improvement plan</div>
+</div>
+<p class="cap24">Colors mark the behavior each example makes visible. Several examples show more than one.</p>
+</div>
+</section>
+
+<!-- 23 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Same assignment, three students">
+<h2>Same Assignment, Three Students</h2>
+<div class="body">
+<p class="small" style="margin-bottom:14px">An undergraduate economics assignment</p>
+<div class="task"><p>“A Korean exporter will receive USD 1 million in export revenue in three months and wants to remove exchange-rate risk. If it hedges with financial derivatives, which instruments are appropriate, and what position should it take in each?”</p></div>
+<div class="avs"><span class="l"><span class="av">A</span>Student A</span><span class="l"><span class="av">B</span>Student B</span><span class="l"><span class="av">C</span>Student C</span><span class="small" style="font-size:22px">All three used AI to write their answers.</span></div>
+<p class="aside b" data-b="1">You do not need to follow the finance. Watch what each student does with AI.</p>
+</div>
+<p class="note">Students A, B, and C are fictional personas built for this workshop.</p>
+</section>
+
+<!-- 24 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="If you graded only the papers">
+<h2>If You Graded Only the Papers</h2>
+<div class="body">
+<div class="pp3">
+<figure class="pcard"><div class="sheet" style="--r:-1.5deg"><b>Student A</b><svg class="pg" viewBox="0 0 182 200" role="img" aria-label="A single paragraph"><rect x="0" y="0" width="120" height="7" rx="3.5" class="sk-t"/><rect x="0" y="18" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="30" width="176" height="6" rx="3.0" class="sk-l"/><rect x="0" y="42" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="54" width="170" height="6" rx="3.0" class="sk-l"/><rect x="0" y="66" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="78" width="178" height="6" rx="3.0" class="sk-l"/><rect x="0" y="90" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="102" width="164" height="6" rx="3.0" class="sk-l"/><rect x="0" y="114" width="96" height="6" rx="3.0" class="sk-l"/></svg></div><figcaption>AI's answer, submitted almost as generated</figcaption></figure>
+<figure class="pcard"><div class="sheet" style="--r:.6deg"><b>Student B</b><svg class="pg" viewBox="0 0 182 200" role="img" aria-label="Three paragraphs"><rect x="0" y="0" width="120" height="7" rx="3.5" class="sk-t"/><rect x="0" y="18" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="30" width="178" height="6" rx="3.0" class="sk-l"/><rect x="0" y="42" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="54" width="170" height="6" rx="3.0" class="sk-l"/><rect x="0" y="66" width="120" height="6" rx="3.0" class="sk-l"/><rect x="0" y="86" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="98" width="176" height="6" rx="3.0" class="sk-l"/><rect x="0" y="110" width="104" height="6" rx="3.0" class="sk-l"/><rect x="0" y="130" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="142" width="172" height="6" rx="3.0" class="sk-l"/><rect x="0" y="154" width="182" height="6" rx="3.0" class="sk-l"/><rect x="0" y="166" width="178" height="6" rx="3.0" class="sk-l"/><rect x="0" y="178" width="132" height="6" rx="3.0" class="sk-l"/></svg></div><figcaption>A structured comparison of pros and cons, in an academic tone</figcaption></figure>
+<figure class="pcard"><div class="sheet two" style="--r:1.5deg"><b>Student C</b><svg class="pg" viewBox="0 0 182 200" role="img" aria-label="Five numbered sections, running past one page"><rect x="0" y="0" width="120" height="7" rx="3.5" class="sk-t"/><rect x="0" y="16" width="182" height="5" rx="2.5" class="sk-l"/><rect x="0" y="25" width="150" height="5" rx="2.5" class="sk-l"/><rect x="0" y="38" width="84" height="6" rx="3.0" class="sk-t"/><rect x="0" y="48" width="182" height="5" rx="2.5" class="sk-l"/><rect x="0" y="57" width="160" height="5" rx="2.5" class="sk-l"/><rect x="0" y="70" width="96" height="6" rx="3.0" class="sk-t"/><rect x="0" y="80" width="182" height="5" rx="2.5" class="sk-l"/><rect x="0" y="89" width="176" height="5" rx="2.5" class="sk-l"/><rect x="0" y="98" width="120" height="5" rx="2.5" class="sk-l"/><rect x="0" y="111" width="88" height="6" rx="3.0" class="sk-t"/><rect x="0" y="121" width="182" height="5" rx="2.5" class="sk-l"/><rect x="0" y="130" width="140" height="5" rx="2.5" class="sk-l"/><rect x="0" y="143" width="110" height="6" rx="3.0" class="sk-t"/><rect x="0" y="153" width="182" height="5" rx="2.5" class="sk-l"/><rect x="0" y="162" width="178" height="5" rx="2.5" class="sk-l"/><rect x="0" y="171" width="150" height="5" rx="2.5" class="sk-l"/><rect x="0" y="184" width="92" height="6" rx="3.0" class="sk-t"/><rect x="0" y="194" width="182" height="5" rx="2.5" class="sk-l"/></svg></div><figcaption>Own structure, stated assumptions, acknowledged limits</figcaption></figure>
+</div>
+<p class="q26 b" data-b="1">How would you score these three papers?</p>
+</div>
+</section>
+
+<!-- 25 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Lens 1: the Prompt Archive">
+<h2>Lens 1: The Prompt Archive</h2>
+<div class="body">
+<div class="lens">
+<div class="lcard" style="background:linear-gradient(135deg,var(--ev-soft),var(--re-soft))"><svg viewBox="0 0 120 96" aria-hidden="true"><rect x="4" y="6" width="74" height="30" rx="12" style="fill:var(--sheet);stroke:var(--ink2);stroke-width:3"/><rect x="42" y="42" width="74" height="30" rx="12" style="fill:var(--ink)"/><rect x="4" y="60" width="54" height="30" rx="12" style="fill:var(--sheet);stroke:var(--ink2);stroke-width:3"/><g style="fill:var(--ink3)"><rect x="16" y="18" width="50" height="6" rx="3"/><rect x="16" y="72" width="30" height="6" rx="3"/></g><rect x="54" y="54" width="50" height="6" rx="3" style="fill:var(--on-ink)"/></svg><p class="lname">Prompt Archive</p><p class="lsub">The record of the student's conversation with AI</p><div class="tags"><span style="--c:var(--ev)">Evaluate evidence</span><span style="--c:var(--re)">Reflect on reasoning</span></div></div>
+<div class="lpts">
+<div><b>The conversation becomes evidence</b><p>Students submit three key excerpts, annotated. The full record stays on file and is opened when something needs checking, or for spot checks.</p></div>
+<div><b>What to look for</b><p>What the student asked, what they accepted, and what they doubted.</p></div>
+<div><b>The student's trace</b><p>Where the student's own questions, doubts, and decisions appear in the exchange.</p></div>
+</div>
+</div>
+<p class="lensq b" data-b="1">Two students can reach the same product by very different paths.</p>
+</div>
+</section>
+
+<!-- 26 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="What Students A and B asked AI">
+<h2>What Students A and B Asked AI</h2>
+<div class="body">
+<div class="ab">
+<div class="col"><div class="stu"><span class="av">A</span><div><b>Hands the answer to AI</b><p>Three turns, no engagement with the content</p></div></div>
+<div class="bub"><i>T1</i>“How should I answer this?”</div>
+<div class="bub"><i>T2</i>“Okay!”</div>
+<div class="bub"><i>T3</i>“Redo it with a title and a stronger final sentence.”</div>
+<p class="sum">Questions, checks, or rebuilds of AI's content: zero. Even the formatting choice was AI's suggestion.</p></div>
+<div class="col b" data-b="1"><div class="stu"><span class="av">B</span><div><b>Asks AI for a better answer</b><p>Requests for information and format</p></div></div>
+<div class="bub"><i>T1</i>“Organize this so I can use it in my answer.”</div>
+<div class="bub"><i>T3</i>“Give me the pros and cons of each method. What's the safest choice?”</div>
+<div class="bub"><i>T5</i>“The conclusion is bland. Make ‘it depends on the company’ sound academic.”</div>
+<p class="sum">Sets the direction but hands off the work of thinking. Doubts, checks, or rebuilds: still zero.</p></div>
+</div>
+</div>
+</section>
+
+<!-- 27 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Student C: thinking with AI">
+<h2 style="margin-bottom:14px">Student C: Thinking With AI</h2>
+<p class="lead" style="margin-bottom:22px">More than 15 turns, built from a chain of thinking moves</p>
+<div class="body">
+<div class="mv">
+<div class="m"><p class="k">1</p><p class="mn">Admits confusion</p><p class="mq">“The concept isn't clicking. Let's go step by step.”</p></div>
+<div class="m"><p class="k">2</p><p class="mn">Presses on terms</p><p class="mq">“What is a financial derivative? Why call it a ‘product’?”</p></div>
+<div class="m"><p class="k">3</p><p class="mn">Restates in own words</p><p class="mq">“Let me summarize what I understood.”</p></div>
+<div class="m"><p class="k">4</p><p class="mn">Exposes and fixes an error</p><p class="mq">“Shouldn't they buy dollars? No, sell.”</p></div>
+<div class="m"><p class="k">5</p><p class="mn">Tests a counterexample</p><p class="mq">“What if the exchange rate rises instead?”</p></div>
+<div class="m"><p class="k">6</p><p class="mn">Checks consistency</p><p class="mq">“With the premium, isn't it a loss in the end?”</p></div>
+<div class="m"><p class="k">7</p><p class="mn">Forms a hypothesis</p><p class="mq">“Do risk tolerance and cash on hand decide it?”</p></div>
+<div class="m"><p class="k">8</p><p class="mn">Integrates and verifies</p><p class="mq">Adds a scenario where the deal falls through, then asks: “Any real cases from small Korean exporters?”</p></div>
+</div>
+<p class="sum29 b" data-b="1">What matters is not how much students talk to AI, but what kinds of thinking moves they make.</p>
+</div>
+</section>
+
+<!-- 28 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Lens 2: the Delta Report">
+<h2>Lens 2: The Delta Report</h2>
+<div class="body">
+<div class="lens">
+<div class="lcard" style="background:var(--rs-soft)"><svg viewBox="0 0 120 96" aria-hidden="true"><rect x="4" y="10" width="44" height="58" rx="5" style="fill:var(--sheet);stroke:var(--ai);stroke-width:3"/><g style="fill:var(--ai);opacity:.7"><rect x="12" y="22" width="28" height="5" rx="2.5"/><rect x="12" y="34" width="24" height="5" rx="2.5"/><rect x="12" y="46" width="28" height="5" rx="2.5"/></g><rect x="72" y="28" width="44" height="58" rx="5" style="fill:var(--sheet);stroke:var(--ink);stroke-width:3"/><g style="fill:var(--ink)"><rect x="80" y="40" width="28" height="5" rx="2.5"/><rect x="80" y="52" width="20" height="5" rx="2.5"/><rect x="80" y="64" width="28" height="5" rx="2.5"/></g><text x="60" y="30" text-anchor="middle" style="font-size:30px;font-weight:700;fill:var(--rs)">Δ</text></svg><p class="lname">Delta Report</p><p class="lsub">The gap between AI's output and the student's final version</p><div class="tags"><span style="--c:var(--rs)">Take responsibility</span></div></div>
+<div class="lpts">
+<div><b>Compare two versions</b><p>The AI-generated answer and the student's final submission.</p></div>
+<div><b>What to look for</b><p>What the student added, changed, and deleted.</p></div>
+<div><b>What it shows</b><p>What changed between the two versions. Who made each change is judged with other evidence, such as the archive excerpts.</p></div>
+</div>
+</div>
+<p class="lensq b" data-b="1">A smooth final version does not, by itself, prove the student's effort.</p>
+</div>
+</section>
+
+<!-- 29 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Three deltas: how much, and by whom">
+<h2>Three Deltas: How Much, and by Whom?</h2>
+<div class="body">
+<div class="dl">
+<div class="dh"><span></span><span>Amount of change</span><span>Author, per the archive</span><span>What the comparison shows</span></div>
+<div class="dr"><span class="av">A</span><b>Almost none</b><b>Not applicable</b><p>The final version is AI's polished output. Even the title was AI's idea, carried out by AI.</p></div>
+<div class="dr b" data-b="1"><span class="av">B</span><b>Rich, on the surface</b><b class="ai">AI</b><p>About twice as long, with added structure and a refined conclusion. Every addition came from later AI turns; B gave one-line directions.</p></div>
+<div class="dr b" data-b="2"><span class="av">C</span><b>Clear, in structure</b><b>The student</b><p>Own framing; added dimensions such as firm size, credit, and a failed deal; a stated position, assumptions, and limits.</p></div>
+</div>
+<p class="sum31 b" data-b="3">The riskiest case is Student B: nothing on the page shows who did the thinking. One more request to AI, “add structure, assumptions, and limits,” and B's paper could look like C's.</p>
+</div>
+<p class="note">Authorship is judged from the Prompt Archive, not from the delta alone.</p>
+</section>
+
+<!-- 30 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Lens 3: the AI Defense">
+<h2>Lens 3: The AI Defense</h2>
+<div class="body">
+<div class="def">
+<div class="lcard" style="background:linear-gradient(135deg,var(--re-soft),var(--rs-soft))"><svg viewBox="0 0 120 96" aria-hidden="true"><path d="M40 6L72 16V44C72 64 58 78 40 88C22 78 8 64 8 44V16Z" style="fill:var(--sheet);stroke:var(--ink);stroke-width:3.5"/><path d="M26 46l10 10 20-22" style="fill:none;stroke:var(--rs);stroke-width:5;stroke-linecap:round;stroke-linejoin:round"/><rect x="78" y="30" width="38" height="28" rx="10" style="fill:var(--re)"/><path d="M86 58l-4 10 12-10" style="fill:var(--re)"/><g style="fill:var(--on-c)"><circle cx="89" cy="44" r="3"/><circle cx="97" cy="44" r="3"/><circle cx="105" cy="44" r="3"/></g></svg><p class="lname">AI Defense</p><p class="lsub">Ask the student, in person, about the key judgments in their answer. A short live answer adds evidence of whether they can explain the reasoning on the spot.</p><div class="tags"><span style="--c:var(--re)">Reflect on reasoning</span><span style="--c:var(--rs)">Take responsibility</span></div></div>
+<div class="qt4">
+<div class="qt"><b>Reasoning</b><p>“Why is buying a put option the right position here?”</p></div>
+<div class="qt"><b>Basis of judgment</b><p>“Your conclusion says X. Why did you judge it that way?”</p></div>
+<div class="qt"><b>Rejection</b><p>“Did the AI suggest anything you disagreed with or rejected?”</p></div>
+<div class="qt"><b>Assumption</b><p>“What does your answer assume? What happens if that assumption breaks?”</p></div>
+</div>
+</div>
+<p class="lensq b" data-b="1">All four ask for the path to the answer, not the answer itself.</p>
+</div>
+</section>
+
+<!-- 31 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="One question, three answers">
+<h2 style="margin-bottom:28px">One Question, Three Answers</h2>
+<div class="body">
+<div class="qbox"><span class="qi">?</span><p>“You wrote that a put option lets the exporter gain when the rate rises while protecting against a fall. What about the premium? Can you really call that a gain?”</p></div>
+<div class="ans">
+<div class="ar b" data-b="1"><span class="av">A</span><div><p class="say">“Um… I don't really remember.”</p><p class="rd">Cannot explain the content of the answer.</p></div></div>
+<div class="ar b" data-b="2"><span class="av">B</span><div><p class="say">“There's a premium, but the advantage is that you don't give up the gains when the rate rises…”</p><p class="rd">Recalls AI's phrasing, then stalls when the contradiction is pressed.</p></div></div>
+<div class="ar b" data-b="3"><span class="av">C</span><div><p class="say">“I doubted that too, so I pressed the AI on it. Once you count the premium, the rate has to rise past a certain level before there's a real gain.”</p><p class="rd">Explains the reasoning in their own words, consistent with the archive.</p></div></div>
+</div>
+</div>
+<p class="note">A simulated exchange with fictional students, built for the workshop. A weak live answer can also reflect anxiety or a language barrier.</p>
+</section>
+
+<!-- 32 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Same assignment, different learning">
+<h2>Same Assignment, Different Learning</h2>
+<div class="body">
+<div class="m34">
+<div></div>
+<div class="hd" style="background:linear-gradient(90deg,var(--ev),var(--re))">Prompt Archive</div>
+<div class="hd" style="background:var(--rs)">Delta Report</div>
+<div class="hd" style="background:linear-gradient(90deg,var(--re),var(--rs))">AI Defense</div>
+<span class="av">A</span><div class="c">Hands the answer to AI</div><div class="c">No change</div><div class="c">Cannot answer</div>
+<span class="av">B</span><div class="c">Requests information and format</div><div class="c">Rich on the surface; made by AI, per the archive</div><div class="c">Recalls AI's phrasing; cannot explain the reasoning</div>
+<span class="av">C</span><div class="c s">Thinks with AI</div><div class="c s">The student's structure and judgment</div><div class="c s">Explains the reasoning consistently</div>
+</div>
+<p class="sum34 b" data-b="1">No single lens is enough. Read together, they show the process, what changed, and whether the student can explain the reasoning on the spot.</p>
+</div>
+</section>
+
+<!-- 33 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Watch Me Verify" style="--c:var(--ink);--cs:var(--soft)">
+<div class="ttl"><h2>Watch Me Verify</h2><div class="tagcol"><span class="bp" style="background:linear-gradient(90deg,var(--ev),var(--re),var(--rs))">All three behaviors</span><span class="prn"><span>Principle:</span> Epistemic interrogation</span></div></div>
+<p class="pl">Show students how an expert checks AI, then hand the check over.</p>
+<div class="body">
+<div class="pat">
+<div class="stp"><div class="st"><b>I do</b><p>The instructor checks one AI answer aloud: what to doubt, where to look, what to accept, and how sure to be.</p></div><div class="st"><b>We do</b><p>Pairs check a second answer, prompted by the instructor.</p></div><div class="st"><b>You do</b><p>Each student checks a third answer alone.</p></div></div>
+<div class="ba">
+<span></span><span class="h">Before</span><span class="h a b" data-b="1">After</span>
+<span class="r">Assignment</span><div class="bf q">Syllabus line: “Use AI responsibly.”</div><div class="af q b" data-b="1">“In class, check three AI answers in our field: one with me, one with a partner, one on your own.”</div>
+<span class="r">What students do</span><div class="bf">Guess what “responsibly” means.</div><div class="af b" data-b="1">Doubt, check, accept, and rate their confidence, using the moves they just watched.</div>
+<span class="r">Assessed on</span><div class="bf">Nothing, until something goes wrong</div><div class="af b" data-b="1">Participation now; the same moves reappear in graded work</div>
+</div>
+</div>
+</div>
+<p class="note">Modeled on cognitive apprenticeship (Collins, Brown, and Newman, 1989).</p>
+</section>
+<!-- 34 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Fact-Check Log" style="--c:var(--ev);--cs:var(--ev-soft)">
+<div class="ttl"><h2>Fact-Check Log</h2><div class="tagcol"><span class="bp" style="background:var(--ev)">Evaluate evidence</span><span class="prn"><span>Principle:</span> Epistemic interrogation</span></div></div>
+<p class="pl">Verify claims the way fact-checkers do: leave the page and check.</p>
+<div class="body">
+<div class="pat">
+<div class="stp"><div class="st"><b>Pick claims</b><p>Choose three to five specific claims from an AI output, including its citations.</p></div><div class="st"><b>Cross-check</b><p>Leave the text and see what other sources say before trusting it.</p></div><div class="st"><b>Log</b><p>For each claim, record a judgment, a source, and a confidence level.</p></div></div>
+<div class="ba">
+<span></span><span class="h">Before</span><span class="h a b" data-b="1">After</span>
+<span class="r">Assignment</span><div class="bf q">“Write a literature review on formative assessment.”</div><div class="af q b" data-b="1">“Here is an AI-written literature summary. Verify five claims and every citation: does it exist, and does it say what the summary claims?”</div>
+<span class="r">What students do</span><div class="bf">Ask AI for a review; submit it.</div><div class="af b" data-b="1">Trace each claim to a source, log a judgment and confidence, and correct what fails.</div>
+<span class="r">Assessed on</span><div class="bf">Coverage and writing quality</div><div class="af b" data-b="1">Accuracy of the judgments and the quality of the sources used</div>
+</div>
+</div>
+</div>
+<p class="note">Lateral reading: Wineburg and McGrew (2019); Wineburg et al. (2022). In a 2023 test of 636 citations in AI-written reviews, 55% (GPT-3.5) and 18% (GPT-4) were fabricated (Walters and Wilder, 2023). Variant: plant the errors yourself.</p>
+</section>
+<!-- 35 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Exemplar Calibration" style="--c:var(--ev);--cs:var(--ev-soft)">
+<div class="ttl"><h2>Exemplar Calibration</h2><div class="tagcol"><span class="bp" style="background:var(--ev)">Evaluate evidence</span><span class="prn"><span>Principle:</span> Epistemic interrogation</span></div></div>
+<p class="pl">Use AI to produce examples of varying quality, then teach students to judge them.</p>
+<div class="body">
+<div class="pat">
+<div class="stp"><div class="st"><b>Grade alone</b><p>Students score two or three AI responses of varying quality against the rubric.</p></div><div class="st"><b>Calibrate</b><p>Pairs reconcile their scores, then compare them with the instructor's scores and reasons.</p></div><div class="st"><b>Apply</b><p>Students turn the same criteria on their own draft and revise it.</p></div></div>
+<div class="ba">
+<span></span><span class="h">Before</span><span class="h a b" data-b="1">After</span>
+<span class="r">Assignment</span><div class="bf q">“Apply learning theory to analyze this teaching case.”</div><div class="af q b" data-b="1">“Grade these three AI analyses of the case with our rubric, reconcile with a partner, then use the rubric to revise your own analysis.”</div>
+<span class="r">What students do</span><div class="bf">Write the analysis alone.</div><div class="af b" data-b="1">Judge quality against criteria, defend the scores, and apply the criteria to their own work.</div>
+<span class="r">Assessed on</span><div class="bf">The analysis</div><div class="af b" data-b="1">Agreement with expert judgment, and the quality of the revision</div>
+</div>
+</div>
+</div>
+<p class="note">Evaluative judgement: Tai et al. (2018); Bearman et al. (2024).</p>
+</section>
+<!-- 36 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Steelman to Synthesis" style="--c:var(--re);--cs:var(--re-soft)">
+<div class="ttl"><h2>Steelman to Synthesis</h2><div class="tagcol"><span class="bp" style="background:var(--re)">Reflect on reasoning</span><span class="prn"><span>Principle:</span> Dialectic engagement</span></div></div>
+<p class="pl">Face the strongest opposing view before settling on a position.</p>
+<div class="body">
+<div class="pat">
+<div class="stp"><div class="st"><b>Vetted objections</b><p>The instructor uses AI to draft the three strongest objections, then checks them.</p></div><div class="st"><b>Steelman</b><p>Students restate one objection in its strongest form, in their own words, before responding.</p></div><div class="st"><b>Synthesis</b><p>Students write a justified position and name the objection that changed their thinking.</p></div></div>
+<div class="ba">
+<span></span><span class="h">Before</span><span class="h a b" data-b="1">After</span>
+<span class="r">Assignment</span><div class="bf q">“Argue for or against later school start times.”</div><div class="af q b" data-b="1">“Here are three strong objections to your position. Restate the strongest, respond to it, and write a synthesis that shows what changed.”</div>
+<span class="r">What students do</span><div class="bf">Pick a side; list supporting points.</div><div class="af b" data-b="1">Steelman, respond, and revise the position with reasons.</div>
+<span class="r">Assessed on</span><div class="bf">Persuasiveness</div><div class="af b" data-b="1">Fairness to the opposing view, and the justification of the final position</div>
+</div>
+</div>
+</div>
+<p class="note">Considering the opposite reduces biased reasoning (Lord, Lepper, and Preston, 1984). Vetting the objections avoids AI's tendency to concede.</p>
+</section>
+<!-- 37 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Metacognition Mirror" style="--c:var(--re);--cs:var(--re-soft)">
+<div class="ttl"><h2>Metacognition Mirror</h2><div class="tagcol"><span class="bp" style="background:var(--re)">Reflect on reasoning</span><span class="prn"><span>Principle:</span> Generative inquiry</span></div></div>
+<p class="pl">Use AI as a mirror for your own thinking, not as an outside authority.</p>
+<div class="body">
+<div class="pat">
+<div class="stp"><div class="st"><b>Externalize</b><p>Write out your reasoning and decisions before AI sees anything.</p></div><div class="st"><b>Reflect</b><p>Ask AI to find premises, hidden assumptions, leaps, and missing perspectives.</p></div><div class="st"><b>Reclaim</b><p>Decide which points to accept, rebut, or revise. Do not simply adopt the analysis.</p></div></div>
+<div class="ba">
+<span></span><span class="h">Before</span><span class="h a b" data-b="1">After</span>
+<span class="r">Assignment</span><div class="bf q">“Summarize your position on topic X.”</div><div class="af q b" data-b="1">“Record your reasoning on topic X step by step, ask AI to analyze it, and submit your own analysis of that analysis.”</div>
+<span class="r">What students do</span><div class="bf">State a position; submit it.</div><div class="af b" data-b="1">Externalize the reasoning, request analysis, decide what to accept, rebut, or revise, and write a meta-analysis.</div>
+<span class="r">Assessed on</span><div class="bf">Consistency and support of the position</div><div class="af b" data-b="1">Visibility of the reasoning, depth of the re-judgment, and justification of each accept or reject decision</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 38 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Predict, Compare, Decide" style="--c:var(--rs);--cs:var(--rs-soft)">
+<div class="ttl"><h2>Predict, Compare, Decide</h2><div class="tagcol"><span class="bp" style="background:var(--rs)">Take responsibility</span><span class="prn"><span>Principle:</span> Iterative knowledge construction</span></div></div>
+<p class="pl">Students think first. AI comes second. Students decide last.</p>
+<div class="body">
+<div class="pat">
+<div class="stp"><div class="st"><b>Predict</b><p>In class, without AI, students write their own answer or plan.</p></div><div class="st"><b>Compare</b><p>They see AI's version and mark agreements, disagreements, and additions.</p></div><div class="st"><b>Decide</b><p>They keep, change, or reject each difference, and justify every choice.</p></div></div>
+<div class="ba">
+<span></span><span class="h">Before</span><span class="h a b" data-b="1">After</span>
+<span class="r">Assignment</span><div class="bf q">“Design a family-engagement plan for a local elementary school.”</div><div class="af q b" data-b="1">“Draft your plan from your own field observations first. Then compare it with AI's plan and justify what you kept, changed, or rejected.”</div>
+<span class="r">What students do</span><div class="bf">Ask AI for a plan; submit it.</div><div class="af b" data-b="1">Observe, draft, compare, and decide, with a reason for each change.</div>
+<span class="r">Assessed on</span><div class="bf">Quality of the plan</div><div class="af b" data-b="1">Use of local evidence, and the reasons given for each accept or reject decision</div>
+</div>
+</div>
+</div>
+<p class="note">A meta-analysis of 53 STEM studies found that attempting problems before instruction aided conceptual learning (Sinha and Kapur, 2021). With about 1,000 high school math students, an AI tutor giving hints, not answers, largely prevented learning losses (Bastani et al., 2025).</p>
+</section>
+<!-- 39 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Accountability Note and Two-Minute Defense" style="--c:var(--rs);--cs:var(--rs-soft)">
+<div class="ttl"><h2>Accountability Note and Two-Minute Defense</h2><div class="tagcol"><span class="bp" style="background:var(--rs)">Take responsibility</span><span class="prn"><span>Construct:</span> Responsibility for thinking</span></div></div>
+<p class="pl">An annotated account of AI use, checked by a short live conversation.</p>
+<div class="body">
+<div class="pat">
+<div class="stp"><div class="st"><b>The note</b><p>With every submission: three key excerpts from the AI conversation, each annotated with what was asked, checked, or decided. The full record stays on file.</p></div><div class="st"><b>The sample</b><p>In class, ask a few randomly chosen students about one decision.</p></div><div class="st"><b>Two minutes</b><p>Use the four question types: reasoning, basis of judgment, rejection, and assumption.</p></div></div>
+<div class="ba">
+<span></span><span class="h">Before</span><span class="h a b" data-b="1">After</span>
+<span class="r">Assignment</span><div class="bf q">“Submit the paper and attach the full chat log.”</div><div class="af q b" data-b="1">“Submit the paper with three annotated excerpts from your AI conversation. Keep the full record on file, and be ready to explain one decision in class.”</div>
+<span class="r">What students do</span><div class="bf">Paste a long log that no one reads.</div><div class="af b" data-b="1">Choose the moments that mattered, annotate them, then explain one decision aloud.</div>
+<span class="r">Assessed on</span><div class="bf">The paper alone</div><div class="af b" data-b="1">The paper, plus the consistency between the excerpts and the live explanation</div>
+</div>
+</div>
+</div>
+<p class="note">The full record is opened to resolve a doubt or for spot checks. The live check is the secure lane of a two-lane approach (University of Sydney).</p>
+</section>
+<!-- 40 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Five Principles That Make These Practices Work">
+<h2>Five Principles That Make These Practices Work</h2>
+<div class="body">
+<div class="shr">
+<div class="shc"><h3>Human first, AI second</h3><p>Where you can, have students commit to their own thinking before they see AI's.</p></div>
+<div class="shc"><h3>In class, short, repeated</h3><p>Dispositions grow from repeated practice, not from one-off assignments.</p></div>
+<div class="shc"><h3>Grade the judgment</h3><p>Score the decisions and the reasons, not the polish of the product.</p></div>
+<div class="shc"><h3>Model it</h3><p>Show students how you check AI in your own field.</p></div>
+<div class="shc"><h3>Authentic to the field</h3><p>Ask for the checks that experts in your discipline actually make.</p></div>
+</div>
+<p class="pm-cap b" data-b="1">Responsibility for thinking cuts across every practice: decide what must stay with the student.</p>
+</div>
+</section>
+<!-- 41 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Seven Practices, Three Behaviors">
+<h2>Seven Practices, Three Behaviors</h2>
+<div class="body">
+<div class="allbar"><b>Watch Me Verify</b><span>From “use AI responsibly” to seeing how it is done</span></div>
+<div class="pm">
+<div class="pgp" style="--c:var(--ev);--cs:var(--ev-soft)"><h3>Evaluate evidence</h3>
+<div class="pi"><b>Fact-Check Log</b><p>From trusting the text to checking the source</p></div>
+<div class="pi"><b>Exemplar Calibration</b><p>From doing the task to judging its quality</p></div></div>
+<div class="pgp" style="--c:var(--re);--cs:var(--re-soft)"><h3>Reflect on reasoning</h3>
+<div class="pi"><b>Steelman to Synthesis</b><p>From one side to a justified synthesis</p></div>
+<div class="pi"><b>Metacognition Mirror</b><p>From stating a position to examining one's thinking</p></div></div>
+<div class="pgp" style="--c:var(--rs);--cs:var(--rs-soft)"><h3>Take responsibility</h3>
+<div class="pi"><b>Predict, Compare, Decide</b><p>From adopting AI's answer to deciding with reasons</p></div>
+<div class="pi"><b>Accountability Note and Defense</b><p>From a pasted log to an account one can defend</p></div></div>
+</div>
+<p class="pm-cap b" data-b="1">Each practice changes what students must do, and so what we can see.</p>
+</div>
+</section>
+
+<!-- 42 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="The same lenses, applied to student-built tools">
+<h2 style="margin-bottom:10px">The Same Lenses, Applied to Student-Built Tools</h2>
+<p class="pl">Vibe coding, reframed as agentic engineering: students build small working tools for their own field by describing them to AI.</p>
+<div class="body">
+<div class="loop"><span>Describe</span><i>→</i><span class="ai">Generate</span><i>→</i><span>Run</span><i>→</i><span>Review</span><i>→</i><span>Revise</span><em>and repeat</em></div>
+<div class="eng3">
+<div class="eng"><h3>Decompose</h3><p>Do not hand AI the whole problem. Break it into units the student can specify and verify.</p></div>
+<div class="eng"><h3>Comprehend</h3><p>Read the generated code and explain how it works in your own words.</p></div>
+<div class="eng"><h3>Iterate</h3><p>Test, analyze the failures, and redesign the prompts. Assess the decision log, not just the product.</p></div>
+</div>
+<p class="sum44 b" data-b="1">Generation without understanding is not learning.</p>
+</div>
+</section>
+
+<!-- 43 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="Case: an interview analysis tool">
+<h2 style="margin-bottom:10px">Case: An Interview Analysis Tool</h2>
+<p class="pl">The classification criteria matter more than the classification results.</p>
+<div class="body">
+<div class="case">
+<div><div class="app" role="img" aria-label="Mock-up of a student-built tool that sorts youth job-search interview responses into themes">
+<div class="bar"><i></i><i></i><i></i></div>
+<div class="in"><h4>Youth job-search interviews: analysis tool</h4>
+<div class="kp"><div><b>24</b><span>interviews</span></div><div><b>6</b><span>themes</span></div><div><b>18</b><span>representative quotes</span></div></div>
+<div class="th"><span>Repeated rejection</span><i style="width:92%"></i><span>Credential pressure</span><i style="width:80%"></i><span>Few local jobs</span><i style="width:62%"></i><span>Unclear career path</span><i style="width:50%"></i><span>Support from others</span><i style="width:38%"></i><span>Other</span><i style="width:22%"></i></div>
+</div></div>
+<p class="mock">Illustrative mock-up, not research data.</p></div>
+<div class="cf">
+<div><b>What the tool does</b><ol><li>Sorts responses by main theme</li><li>Pulls a representative quote for each theme</li><li>Briefly explains the basis for each classification</li></ol></div>
+<div><b>Fits</b><p>Social sciences, education, counseling, qualitative methods</p></div>
+<div class="jd b" data-b="1"><b>The student's judgment</b><p>Which categories are appropriate, and why?</p></div>
+<div class="b" data-b="1"><b>Assessed on</b><p>Validity of the categories, the evidence for them, and how exceptions are handled</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 44 -->
+<section class="slide" data-part="Assignment &amp; Assessment Examples" aria-label="What students submit">
+<h2>What Students Submit: An Evidence Set, Not a Product</h2>
+<div class="body">
+<div class="ev5">
+<div class="e5"><svg viewBox="0 0 54 54" aria-hidden="true"><rect x="3" y="10" width="48" height="34" rx="6" style="fill:var(--sheet);stroke:var(--ink2);stroke-width:3"/><path d="M22 19v16l14-8z" style="fill:var(--ink)"/></svg><h3>Working demo</h3><p>What works, and how?</p><p class="ln"></p></div>
+<div class="e5"><svg viewBox="0 0 54 54" aria-hidden="true"><rect x="8" y="4" width="38" height="46" rx="5" style="fill:var(--sheet);stroke:var(--ink2);stroke-width:3"/><g style="fill:var(--ink2)"><rect x="15" y="14" width="24" height="4" rx="2"/><rect x="15" y="24" width="18" height="4" rx="2"/><rect x="15" y="34" width="22" height="4" rx="2"/></g><circle cx="12" cy="16" r="2.5" style="fill:var(--ai)"/><circle cx="12" cy="26" r="2.5" style="fill:var(--ai)"/><circle cx="12" cy="36" r="2.5" style="fill:var(--ai)"/></svg><h3>Decision log</h3><p>What did you ask for, and what did you change?</p><p class="ln"><span style="background:linear-gradient(90deg,var(--ev-soft),var(--re-soft))">Prompt Archive</span></p></div>
+<div class="e5"><svg viewBox="0 0 54 54" aria-hidden="true"><rect x="3" y="8" width="48" height="38" rx="6" style="fill:var(--sheet);stroke:var(--ink2);stroke-width:3"/><path d="M19 20l-7 7 7 7M35 20l7 7-7 7M30 17l-6 20" style="fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round"/></svg><h3>Code explanation</h3><p>What role does each key function play?</p><p class="ln"><span style="background:linear-gradient(90deg,var(--re-soft),var(--rs-soft))">AI Defense</span></p></div>
+<div class="e5"><svg viewBox="0 0 54 54" aria-hidden="true"><path d="M27 5L50 46H4Z" style="fill:var(--sheet);stroke:var(--ink2);stroke-width:3;stroke-linejoin:round"/><path d="M27 20v12" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/><circle cx="27" cy="39" r="2.8" style="fill:var(--ink)"/></svg><h3>Limitations</h3><p>What is still missing, and why?</p><p class="ln"></p></div>
+<div class="e5"><svg viewBox="0 0 54 54" aria-hidden="true"><path d="M6 44l14-14 10 8 18-22" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/><path d="M38 16h10v10" style="fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/></svg><h3>Improvement plan</h3><p>What will you change in the next round?</p><p class="ln"><span style="background:var(--rs-soft)">Delta Report</span></p></div>
+</div>
+<p class="sum46 b" data-b="1"><b>Assess the product, the process, and the explanation of judgment together:</b> code comprehension, awareness of failures and limits, and the transparency of the decision log.</p>
+</div>
+</section>
+
+<!-- 45 -->
+<section class="slide" data-part="Closing" aria-label="What to grade">
+<h2>What to Grade: Working Criteria for the Three Lenses</h2>
+<div class="body">
+<div class="gr">
+<span></span><span class="h">Collect</span><span class="h">Look for</span><span class="h">A strong response shows</span>
+<div class="ln" style="background:linear-gradient(90deg,var(--ev-soft),var(--re-soft))">Prompt Archive</div><div class="c">Three key excerpts, each annotated; the full record kept on file for checks and spot checks</div><div class="c">What the student asked, accepted, and doubted</div><div class="c">Questions refined toward a goal; AI claims checked and contested where warranted</div>
+<div class="ln" style="background:var(--rs-soft)">Delta Report</div><div class="c">The first AI draft, the final version, and three stated contributions</div><div class="c">Additions, changes, and deletions; who made each, checked against the archive</div><div class="c">Specific contributions: corrected facts, added context, the student's own structure</div>
+<div class="ln" style="background:linear-gradient(90deg,var(--re-soft),var(--rs-soft))">AI Defense</div><div class="c">Live or recorded answers to three questions drawn from the four types</div><div class="c">Reasoning, basis of judgment, rejections, assumptions</div><div class="c">Consistent reasoning in the student's own words, including the limits of the answer</div>
+</div>
+</div>
+<p class="note">Working criteria drawn from the workshop materials. The three-lens rubric has not yet been validated.</p>
+</section>
+
+<!-- 46 -->
+<section class="slide" data-part="Closing" aria-label="Keeping it feasible">
+<h2>Keeping It Feasible</h2>
+<div class="body">
+<div class="fz">
+<div class="fzc"><h3>Workload is the real bottleneck</h3><p>Grading process evidence takes instructor time. Plan for it from the start, not after the first submissions arrive.</p></div>
+<div class="fzc"><h3>Make it required and graded</h3><p>Voluntary, ungraded process evidence did not produce usable work in our pilot.</p><span class="tg">Presenter's pilot observation, unpublished</span></div>
+<div class="fzc"><h3>Read less, see more</h3><p>Read the three annotated excerpts. Open the full record when something needs checking, and for occasional spot checks.</p></div>
+<div class="fzc"><h3>Start small</h3><p>One assignment, one lens. Sample the defense with short recorded answers.</p></div>
+</div>
+</div>
+</section>
+
+<!-- 47 -->
+<section class="slide" data-part="Closing" aria-label="Cautions before you adopt">
+<h2>Cautions Before You Adopt</h2>
+<div class="body">
+<div class="fz">
+<div class="fzc"><h3>Verifiability</h3><p>Excerpts can be cherry-picked, and records can be generated after the fact. Keep the full record on file for spot checks, and pair excerpts with a short defense.</p></div>
+<div class="fzc"><h3>Privacy and access</h3><p>Students differ in accounts and paid tiers. Accept exported transcripts, and prefer institution-provided tools.</p></div>
+<div class="fzc"><h3>Evidence</h3><p>The practices rest on established principles, but none has been tested as a way to build epistemic responsibility with AI. Generativism's own propositions still await testing (Byun and Alagic, 2026, p. 40).</p></div>
+<div class="fzc"><h3>Scope</h3><p>Generativism describes an advanced mode of learning by critical thinkers. How it applies to novice learners is an open question (p. 43).</p></div>
+</div>
+</div>
+</section>
+
+<!-- 48 -->
+<section class="slide" data-part="Closing" aria-label="Questions to take back">
+<h2>Five Questions for Your Next Assignment</h2>
+<div class="body">
+<div class="fin">
+<ol class="q5">
+<li>What in this assignment can students hand to AI?</li>
+<li>Which judgments must stay with the student?</li>
+<li>In what activity do those judgments become visible?</li>
+<li>What evidence will show them?</li>
+<li>How will students explain and defend them?</li>
+</ol>
+<div class="thx"><div><p class="t">Thank you</p><p class="s">Questions and discussion</p><p class="thxm">Assessment design in the AI era starts with responsibility for thinking.</p></div><p class="c">JaeHwan Byun, Ph.D.<br>jaehwan.byun@wichita.edu</p></div>
+</div>
+</div>
+</section>
+
+<!-- 49 -->
+<section class="slide" data-part="Closing" aria-label="References">
+<h2>References</h2>
+<div class="refs"><p>Bastani, H., Bastani, O., Sungu, A., Ge, H., Kabakcı, Ö., &amp; Mariman, R. (2025). Generative AI without guardrails can harm learning: Evidence from high school mathematics. <i>Proceedings of the National Academy of Sciences, 122</i>(26), e2422633122. https://doi.org/10.1073/pnas.2422633122</p><p>Bearman, M., Tai, J., Dawson, P., Boud, D., &amp; Ajjawi, R. (2024). Developing evaluative judgement for a time of generative artificial intelligence. <i>Assessment &amp; Evaluation in Higher Education, 49</i>(6), 893–905. https://doi.org/10.1080/02602938.2024.2335321</p><p>Byun, J., &amp; Alagic, M. (2026). Generative artificial intelligence as a transformative catalyst for a learning paradigm shift. <i>International Journal of Advanced Corporate Learning, 19</i>(2), 34–44. https://doi.org/10.3991/ijac.v19i2.58883</p><p>Byun, J., &amp; Alagic, M. (under review). <i>Designing for epistemic responsibility in the age of generative AI</i> [Research proposal].</p><p>Code, L. (1987). <i>Epistemic responsibility</i>. Brown University Press; University Press of New England. Reissued 2020, SUNY Press.</p><p>Collins, A., Brown, J. S., &amp; Newman, S. E. (1989). Cognitive apprenticeship: Teaching the crafts of reading, writing, and mathematics. In L. B. Resnick (Ed.), <i>Knowing, learning, and instruction: Essays in honor of Robert Glaser</i> (pp. 453–494). Erlbaum.</p><p>Desai, H. (2026). What's worth measuring? The future of assessment in the AI age. In <i>The algorithm in the room: Seeing and confronting the implications of AI for the future of education</i> (pp. 64–67). UNESCO.</p><p>Doss, C. J., Bozick, R., Schwartz, H. L., Chu, L., Rainey, L. R., Woo, A., Reich, J., &amp; Dukes, J. (2025). <i>AI use in schools is quickly increasing but guidance lags behind: Findings from the RAND Survey Panels</i> (RR-A4180-1). RAND Corporation.</p><p>Fan, Y., Tang, L., Le, H., Shen, K., Tan, S., Zhao, Y., Shen, Y., Li, X., &amp; Gašević, D. (2025). Beware of metacognitive laziness: Effects of generative artificial intelligence on learning motivation, processes, and performance. <i>British Journal of Educational Technology, 56</i>(2), 489–530. https://doi.org/10.1111/bjet.13544</p><p>Jisc National Centre for AI. (2025, June 24). <i>AI detection and assessment: An update for 2025</i> [Blog post].</p><p>Liang, W., Yuksekgonul, M., Mao, Y., Wu, E., &amp; Zou, J. (2023). GPT detectors are biased against non-native English writers. <i>Patterns</i>.</p></div>
+</section>
+
+<!-- 50 -->
+<section class="slide" data-part="Closing" aria-label="References (Continued)">
+<h2>References (Continued)</h2>
+<div class="refs"><p>Lord, C. G., Lepper, M. R., &amp; Preston, E. (1984). Considering the opposite: A corrective strategy for social judgment. <i>Journal of Personality and Social Psychology, 47</i>(6), 1231–1243.</p><p>OpenAI. (2023, January 31; updated July 20, 2023). <i>New AI classifier for indicating AI-written text</i> [Blog post].</p><p>Schwartz, H. L., &amp; Diliberti, M. K. (2026). <i>More students use AI for homework, and more believe it harms critical thinking: Selected findings from the American Youth Panel</i> (RR-A4742-1). RAND Corporation.</p><p>Sinha, T., &amp; Kapur, M. (2021). When problem solving followed by instruction works: Evidence for productive failure. <i>Review of Educational Research</i>. https://doi.org/10.3102/00346543211019105</p><p>Tai, J., Ajjawi, R., Boud, D., Dawson, P., &amp; Panadero, E. (2018). Developing evaluative judgement: Enabling students to make decisions about the quality of work. <i>Higher Education, 76</i>(3), 467–481.</p><p>University of Sydney. (n.d.). <i>Frequently asked questions about the two-lane approach to assessment in the age of AI</i>. Teaching@Sydney.</p><p>Walters, W. H., &amp; Wilder, E. I. (2023). Fabrication and errors in the bibliographic citations generated by ChatGPT. <i>Scientific Reports, 13</i>, 14045. https://doi.org/10.1038/s41598-023-41032-5</p><p>Weber-Wulff, D., et al. (2023). Testing of detection tools for AI-generated text. <i>International Journal for Educational Integrity, 19</i>, 26. https://doi.org/10.1007/s40979-023-00146-z</p><p>Wineburg, S., Breakstone, J., McGrew, S., Smith, M. D., &amp; Ortega, T. (2022). Lateral reading on the open Internet: A district-wide field study in high school government classes. <i>Journal of Educational Psychology</i>.</p><p>Wineburg, S., &amp; McGrew, S. (2019). Lateral reading and the nature of expertise: Reading less and learning more when evaluating digital information. <i>Teachers College Record, 121</i>(11), 1–40.</p></div>
+</section>
+
+<footer class="foot" id="foot"><span class="fp" id="fp"></span><div class="track" id="track"></div><span class="fn" id="fn"></span></footer>
+</div>
+</div>
+<div class="ctl" id="ctl"><button id="bp" type="button">Previous</button><button id="bn" type="button">Next</button><button id="bf" type="button">Full screen</button></div>
+<div class="hint" id="hint">Click anywhere on the slide to advance; right-click to go back. Arrow keys and clickers also work. F: full screen. T: light or dark.</div>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var vp=$('vp'),deck=$('deck'),foot=$('foot'),fp=$('fp'),fn=$('fn'),track=$('track'),ctl=$('ctl'),hint=$('hint');
+var slides=Array.prototype.slice.call(deck.querySelectorAll('.slide')),i=0,b=0;
+var PLAN=[['Opening',3],['Generativism',7],['Challenges for Educators',8],['Epistemic Responsibility',4],['Assignment & Assessment Examples',22],['Closing',4]];
+track.innerHTML=PLAN.map(function(p){return '<i style="flex:'+p[1]+'"></i>'}).join('');
+try{var t=localStorage.getItem('bad-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}
+function fit(){var w=vp.clientWidth,h=vp.clientHeight,s=Math.min(w/1600,h/900);deck.style.transform='translate('+(w-1600*s)/2+'px,'+(h-900*s)/2+'px) scale('+s+')'}
+function steps(k){var set={};Array.prototype.forEach.call(slides[k].querySelectorAll('[data-b]'),function(e){set[e.getAttribute('data-b')]=1});return Object.keys(set).map(Number).sort(function(x,y){return x-y})}
+function paint(){var st=steps(i);Array.prototype.forEach.call(slides[i].querySelectorAll('[data-b]'),function(e){var on=st.indexOf(+e.getAttribute('data-b'))<b;if(e.classList.contains('bx'))e.classList.toggle('out',on);else e.classList.toggle('in',on)})}
+function updateFoot(){var part=slides[i].getAttribute('data-part'),idx=-1;PLAN.forEach(function(p,k){if(p[0]===part)idx=k});Array.prototype.forEach.call(track.children,function(e,k){e.className=k<idx?'done':(k===idx?'cur':'')});fp.textContent=part;fn.textContent=i+1;foot.classList.toggle('hide',slides[i].hasAttribute('data-nofoot'))}
+function render(k,full){i=Math.max(0,Math.min(slides.length-1,k));slides.forEach(function(s,j){s.classList.toggle('on',j===i);s.setAttribute('aria-hidden',j===i?'false':'true')});b=full?steps(i).length:0;paint();updateFoot();try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+function next(){if(b<steps(i).length){b++;paint()}else if(i<slides.length-1){render(i+1,false)}}
+function prev(){if(b>0){b--;paint()}else if(i>0){render(i-1,true)}}
+function full(){var d=document,el=d.documentElement,r;try{if(!(d.fullscreenElement||d.webkitFullscreenElement)){r=(el.requestFullscreen||el.webkitRequestFullscreen).call(el)}else{r=(d.exitFullscreen||d.webkitExitFullscreen).call(d)}if(r&&r.catch)r.catch(function(){})}catch(e){}}
+function theme(){var el=document.documentElement,n=el.getAttribute('data-theme')==='dark'?'light':'dark';el.setAttribute('data-theme',n);try{localStorage.setItem('bad-theme',n)}catch(e){}}
+function hideHint(){hint.classList.add('off')}
+document.addEventListener('keydown',function(e){if(e.altKey||e.ctrlKey||e.metaKey)return;var k=e.key;
+ if(k==='ArrowRight'||k==='ArrowDown'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();next();hideHint()}
+ else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev();hideHint()}
+ else if(k==='Home'){e.preventDefault();render(0,false)}else if(k==='End'){e.preventDefault();render(slides.length-1,true)}
+ else if(k==='f'||k==='F'){full();hideHint()}else if(k==='t'||k==='T'){theme()}});
+$('bn').onclick=function(){next();vp.focus()};
+$('bp').onclick=function(){prev();vp.focus()};
+$('bf').onclick=function(){full();vp.focus()};
+vp.addEventListener('click',function(e){vp.focus();if(e.button!==0)return;if(e.shiftKey)prev();else next();hideHint()});
+vp.addEventListener('contextmenu',function(e){e.preventDefault();prev();hideHint()});
+var ht;document.addEventListener('mousemove',function(){ctl.classList.add('show');clearTimeout(ht);ht=setTimeout(function(){ctl.classList.remove('show')},2200)});
+var tx=null;vp.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+vp.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){dx<0?next():prev()}tx=null},{passive:true});
+window.addEventListener('resize',fit);
+if(window.ResizeObserver){new ResizeObserver(fit).observe(vp)}
+fit();var hs=parseInt((location.hash||'').slice(1),10);render(hs>0?hs-1:0,hs>0);
+setTimeout(hideHint,7000);vp.focus();
+window.deckGo=function(k,f){render(k,f)};
+window.deckState=function(){return {i:i,b:b}};
+})();
+</script>
+</body>
+</html>
